@@ -29,13 +29,15 @@ Template:       twentyeleven
 	height: 200px;
 	width: 200px;
 }
-.post-title {
+.post-info {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
 	background-color: black;
 	color: white;
 	margin: 0;
-	padding: 10px;
-	padding-right: 0;
+	padding: 10px 0;
+}
+.post-title {
+	margin: 0 10px;
 }
