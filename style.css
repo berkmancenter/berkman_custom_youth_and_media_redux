@@ -1,0 +1,41 @@
+/*
+Theme Name:     Youth and Media
+Description:    Custom Youth and Media twentyeleven custom theme
+Author:         Justin Clark
+Template:       twentyeleven
+*/
+@import url("../twentyeleven/style.css");
+
+.block {
+	position: relative;
+	padding: 0;
+	margin: 10px;
+}
+.featured {
+	height: 400px;
+	width: 400px;
+
+}
+.vertical {
+	height: 400px;
+	width: 200px;
+}
+.horizontal {
+	height: 200px;
+	width: 400px;
+
+}
+.small {
+	height: 200px;
+	width: 200px;
+}
+.post-title {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: black;
+	color: white;
+	margin: 0;
+	padding: 10px;
+	padding-right: 0;
+}
