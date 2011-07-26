@@ -88,10 +88,14 @@ function create_calendar_iframe($attributes) {
 		'width' => '250',
 		'src' => '',
 		'bgcolor' => 'FFFFFF',
-		'color' => 'A32929'
+		'color' => 'A32929',
+		'mode' => 'AGENDA'
 	), $attributes ) );
+	if (!empty($src)) {
+		$src = 'src='.urlencode($src).'&amp;';
+	}
 
-	$src = '<iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height='.$height.'&amp;wkst=1&amp;bgcolor=%23'.$bgcolor.'&amp;src='.urlencode($src).'&amp;color=%23'.$color.'&amp;ctz=America%2FNew_York" style=" border-width:0 " width="'.$width.'" height="'.$height.'" frameborder="0" scrolling="no"></iframe>';
+	$src = '<iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height='.$height.'&amp;wkst=1&amp;mode='.strtoupper($mode).'&amp;bgcolor=%23'.$bgcolor.'&amp;'.$src.'color=%23'.$color.'&amp;ctz=America%2FNew_York" style=" border-width:0 " width="'.$width.'" height="'.$height.'" frameborder="0" scrolling="no"></iframe>';
 
 	return $src;
 }

@@ -6,23 +6,41 @@ Template:       twentyeleven
 */
 @import url("../twentyeleven/style.css");
 
+body {
+	padding: 0;
+	background-color: white;
+}
+#page {
+	max-width: none;
+	margin-top: 0;
+	padding: 0 4%;
+}
+#branding {
+	border: 0;
+}
+#branding img {
+	max-height: 200px;
+}
+#content {
+	margin-left: 0;
+}
 .block {
 	position: relative;
 	padding: 0;
 	margin: 10px;
 }
 .featured {
-	height: 400px;
-	width: 400px;
+	height: 420px;
+	width: 420px;
 
 }
 .vertical {
-	height: 400px;
+	height: 420px;
 	width: 200px;
 }
 .horizontal {
 	height: 200px;
-	width: 400px;
+	width: 420px;
 
 }
 .small {
@@ -38,6 +56,19 @@ Template:       twentyeleven
 	margin: 0;
 	padding: 10px 0;
 }
-.post-title {
+.post-title, .post-excerpt {
 	margin: 0 10px;
+}
+.post-title {
+	font-size: 120%;
+}
+.post-excerpt {
+	font-size: 85%;
+	display: none;
+}
+.post-excerpt p {
+	margin-bottom: 0;
+}
+.view-cap, .view-container-border {
+	background-color: black !important;
 }
