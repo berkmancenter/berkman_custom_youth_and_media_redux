@@ -101,6 +101,16 @@ function create_calendar_iframe($attributes) {
 	return $src;
 }
 
+function create_sponsor_block($attributes) {
+	if (!empty($src)) {
+		$src = 'src='.urlencode($src).'&amp;';
+	}
+
+	$src = '<div class="sponsors"><img src="'.get_stylesheet_directory_uri().'/images/Berkman-140px.png" alt="Berkman Center" /><br /><img src="'.get_stylesheet_directory_uri().'/images/StGallenFIRHSG.gif" alt="St Gallen" /></div>';
+
+	return $src;
+}
+
 function create_flickr_gallery($attributes) {
 	extract( shortcode_atts( array(
 		'flickr_nsid' => FLICKR_NSID,
@@ -124,6 +134,7 @@ wp_enqueue_script('youth-and-media');
 
 add_shortcode( 'google-calendar', 'create_calendar_iframe' );
 add_shortcode( 'flickr-gallery', 'create_flickr_gallery' );
+add_shortcode( 'sponsors', 'create_sponsor_block' );
 add_filter('widget_text', 'do_shortcode');
 add_action('post_updated', 'add_format_categories');
 add_action('init', 'on_init');
