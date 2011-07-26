@@ -42,8 +42,19 @@ function on_init() {
 		)
 	);
 
+	register_sidebar( array(
+		'name' => __( 'Front Page Sidebar', 'youth-and-media' ),
+		'id' => 'sidebar-6',
+		'description' => __( 'The sidebar on the front page', 'youth-and-media' ),
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => "</aside>",
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+
 	populate_flickr_taxonomy(FLICKR_NSID);
 	populate_block_size_taxonomy();
+	remove_filter( 'body_class', 'twentyeleven_body_classes' );
 }
 
 
@@ -137,10 +148,18 @@ function create_flickr_gallery($attributes) {
 	}
 	return $html.'</div>';
 }
-wp_register_script('isotope', get_stylesheet_directory_uri() . '/js/jquery.isotope.min.js', array('jquery') );
-wp_register_script('youth-and-media', get_stylesheet_directory_uri() . '/js/youth-and-media.js', array('isotope') );
-wp_enqueue_script('isotope');
-wp_enqueue_script('youth-and-media');
+
+function twentyeleven_body_classes( $classes ) {
+
+	if ( ! is_multi_author() ) {
+		$classes[] = 'single-author';
+	}
+
+	if ( is_singular() && ! is_home() && ! is_front_page() && ! is_page_template( 'showcase.php' ) && ! is_page_template( 'sidebar-page.php' ) )
+		$classes[] = 'singular';
+
+	return $classes;
+}
 
 add_shortcode( 'google-calendar', 'create_calendar_iframe' );
 add_shortcode( 'flickr-gallery', 'create_flickr_gallery' );
@@ -149,3 +168,4 @@ add_shortcode( 'social-links', 'create_social_block' );
 add_filter('widget_text', 'do_shortcode');
 add_action('post_updated', 'add_format_categories');
 add_action('init', 'on_init');
+add_filter('body_class', 'twentyeleven_body_classes');
