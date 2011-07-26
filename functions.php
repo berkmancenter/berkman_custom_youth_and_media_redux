@@ -111,6 +111,16 @@ function create_sponsor_block($attributes) {
 	return $src;
 }
 
+function create_social_block($attributes) {
+	if (!empty($src)) {
+		$src = 'src='.urlencode($src).'&amp;';
+	}
+
+	$src = '<div class="social-links"><a href=""><img src="'.get_stylesheet_directory_uri().'/images/social-icons/twitter-64x64.png" alt="Twitter" /></a><a href=""><img src="'.get_stylesheet_directory_uri().'/images/social-icons/facebook-64x64.png" alt="Facebook" /></a></div>';
+
+	return $src;
+}
+
 function create_flickr_gallery($attributes) {
 	extract( shortcode_atts( array(
 		'flickr_nsid' => FLICKR_NSID,
@@ -135,6 +145,7 @@ wp_enqueue_script('youth-and-media');
 add_shortcode( 'google-calendar', 'create_calendar_iframe' );
 add_shortcode( 'flickr-gallery', 'create_flickr_gallery' );
 add_shortcode( 'sponsors', 'create_sponsor_block' );
+add_shortcode( 'social-links', 'create_social_block' );
 add_filter('widget_text', 'do_shortcode');
 add_action('post_updated', 'add_format_categories');
 add_action('init', 'on_init');
