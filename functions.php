@@ -106,7 +106,7 @@ function create_sponsor_block($attributes) {
 		$src = 'src='.urlencode($src).'&amp;';
 	}
 
-	$src = '<div class="sponsors"><a href="http://cyber.law.harvard.edu/"><img src="'.get_stylesheet_directory_uri().'/images/Berkman-140px.png" alt="Berkman Center" /></a><br /><a href="http://www.fir.unisg.ch/"><img src="'.get_stylesheet_directory_uri().'/images/StGallenFIRHSG.gif" alt="St Gallen" /></a></div>';
+	$src = '<div class="sponsors"><a href="http://cyber.law.harvard.edu/" target="_blank"><img src="'.get_stylesheet_directory_uri().'/images/Berkman-140px.png" alt="Berkman Center" /></a><br /><a href="http://www.fir.unisg.ch/" target="_blank"><img src="'.get_stylesheet_directory_uri().'/images/StGallenFIRHSG.gif" alt="St Gallen" /></a></div>';
 
 	return $src;
 }
