@@ -72,3 +72,12 @@ body {
 .view-cap, .view-container-border {
 	background-color: black !important;
 }
+.flickr-gallery {
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+}
+.flickr-image {
+	width: 80px;
+	margin: 10px;
+}

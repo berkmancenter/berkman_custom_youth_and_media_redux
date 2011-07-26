@@ -46,6 +46,7 @@ function on_init() {
 	populate_block_size_taxonomy();
 }
 
+
 function populate_flickr_taxonomy($flickr_nsid) {
 	$url = 'http://api.flickr.com/services/rest/?method=flickr.tags.getListUser&api_key='.FLICKR_API_KEY.'&user_id='.$flickr_nsid.'&format=php_serial&nojsoncallback=1';
 	$ch = curl_init($url);
@@ -99,12 +100,30 @@ function create_calendar_iframe($attributes) {
 
 	return $src;
 }
+
+function create_flickr_gallery($attributes) {
+	extract( shortcode_atts( array(
+		'flickr_nsid' => FLICKR_NSID,
+	), $attributes ) );
+
+	$html = '<div class="flickr-gallery">';
+	$url = 'http://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&per_page=24&api_key='.FLICKR_API_KEY.'&user_id='.$flickr_nsid.'&format=php_serial&nojsoncallback=1';
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$output = unserialize(curl_exec($ch));
+
+	foreach ($output['photos']['photo'] as $photo) {
+		$html .= '<img class="flickr-image" alt="' . $photo['title'] . '" src="http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_m.jpg" />';
+	}
+	return $html.'</div>';
+}
 wp_register_script('isotope', get_stylesheet_directory_uri() . '/js/jquery.isotope.min.js', array('jquery') );
 wp_register_script('youth-and-media', get_stylesheet_directory_uri() . '/js/youth-and-media.js', array('isotope') );
 wp_enqueue_script('isotope');
 wp_enqueue_script('youth-and-media');
 
 add_shortcode( 'google-calendar', 'create_calendar_iframe' );
+add_shortcode( 'flickr-gallery', 'create_flickr_gallery' );
 add_filter('widget_text', 'do_shortcode');
 add_action('post_updated', 'add_format_categories');
 add_action('init', 'on_init');
