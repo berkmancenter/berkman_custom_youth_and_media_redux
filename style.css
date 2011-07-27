@@ -86,3 +86,13 @@ body {
 .social-links img {
 	margin: 5px;
 }
+#viz1 {
+	height: 200px;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 100%;
+}
+.viz1-image {
+	height: 180px;
+	padding: 0 10px;
+}

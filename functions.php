@@ -135,21 +135,36 @@ function create_social_block($attributes) {
 function create_flickr_gallery($attributes) {
 	extract( shortcode_atts( array(
 		'flickr_nsid' => FLICKR_NSID,
+		'class' => 'flickr-gallery',
+		'image_class' => 'flickr-image',
+		'id' => false,
+		'size' => 's',
+		'tags' => '',
+		'results' => 24
 	), $attributes ) );
 
-	$html = '<div class="flickr-gallery">';
-	$url = 'http://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&per_page=24&api_key='.FLICKR_API_KEY.'&user_id='.$flickr_nsid.'&format=php_serial&nojsoncallback=1';
+	if ($id) {
+		$id = 'id="'.$id.'"';
+	}
+	if (!empty($tags)) {
+		$tags = 'tags='.$tags.'&';
+	}
+	if (!empty($class)) {
+		$class = 'class="'.$class.'"';
+	}
+	$html = '<div '.$id.' '.$class.'>';
+	$url = 'http://api.flickr.com/services/rest/?method=flickr.photos.search&per_page='.$results.'&api_key='.FLICKR_API_KEY.'&user_id='.$flickr_nsid.'&'.$tags.'format=php_serial&nojsoncallback=1';
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$output = unserialize(curl_exec($ch));
 
 	foreach ($output['photos']['photo'] as $photo) {
-		$html .= '<img class="flickr-image" alt="' . $photo['title'] . '" src="http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_m.jpg" />';
+		$html .= '<img class="'.$image_class.'" alt="' . $photo['title'] . '" src="http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_'.$size.'.jpg" />';
 	}
 	return $html.'</div>';
 }
 
-function twentyeleven_body_classes( $classes ) {
+function alter_body_classes( $classes ) {
 
 	if ( ! is_multi_author() ) {
 		$classes[] = 'single-author';
@@ -168,4 +183,4 @@ add_shortcode( 'social-links', 'create_social_block' );
 add_filter('widget_text', 'do_shortcode');
 add_action('post_updated', 'add_format_categories');
 add_action('init', 'on_init');
-add_filter('body_class', 'twentyeleven_body_classes');
+add_filter('body_class', 'alter_body_classes');
