@@ -84,7 +84,6 @@ function add_format_categories($post_id) {
 	$post_contains = array('Text');
 	$children = get_children(array(‘post_type’ => ‘attachment’, ‘post_parent’ => $post_id));
 	foreach ($children as $child_id => $child) {
-		error_log('Child: '.print_r($child, TRUE));
 		$mime_type = get_post_mime_type($child_id);
 		if (array_key_exists($mime_type, $mime_type_to_category)) {
 			$post_contains[] = $mime_type_to_category[$mime_type];
@@ -107,7 +106,7 @@ function create_calendar_iframe($attributes) {
 		$src = 'src='.urlencode($src).'&amp;';
 	}
 
-	$src = '<iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height='.$height.'&amp;wkst=1&amp;mode='.strtoupper($mode).'&amp;bgcolor=%23'.$bgcolor.'&amp;'.$src.'color=%23'.$color.'&amp;ctz=America%2FNew_York" style=" border-width:0 " width="'.$width.'" height="'.$height.'" frameborder="0" scrolling="no"></iframe>';
+	$src = '<iframe class="google-calendar" src="https://www.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height='.$height.'&amp;wkst=1&amp;mode='.strtoupper($mode).'&amp;bgcolor=%23'.$bgcolor.'&amp;'.$src.'color=%23'.$color.'&amp;ctz=America%2FNew_York" style=" border-width:0 " width="'.$width.'" height="'.$height.'" frameborder="0" scrolling="no"></iframe>';
 
 	return $src;
 }
@@ -127,7 +126,7 @@ function create_social_block($attributes) {
 		$src = 'src='.urlencode($src).'&amp;';
 	}
 
-	$src = '<div class="social-links"><a href=""><img src="'.get_stylesheet_directory_uri().'/images/social-icons/twitter-64x64.png" alt="Twitter" /></a><a href=""><img src="'.get_stylesheet_directory_uri().'/images/social-icons/facebook-64x64.png" alt="Facebook" /></a></div>';
+	$src = '<div class="social-links"><a href=""><img src="'.get_stylesheet_directory_uri().'/images/social-icons/twitter.png" alt="Twitter" /></a><a href=""><img src="'.get_stylesheet_directory_uri().'/images/social-icons/facebook.png" alt="Facebook" /></a></div>';
 
 	return $src;
 }
@@ -170,7 +169,7 @@ function alter_body_classes( $classes ) {
 		$classes[] = 'single-author';
 	}
 
-	if ( is_singular() && ! is_home() && ! is_front_page() && ! is_page_template( 'showcase.php' ) && ! is_page_template( 'sidebar-page.php' ) )
+	if ( is_singular() && ! is_home() && ! is_front_page() && ! is_page_template( 'showcase.php' ) && ! is_page_template( 'sidebar-page.php' ) && ! is_page() )
 		$classes[] = 'singular';
 
 	return $classes;

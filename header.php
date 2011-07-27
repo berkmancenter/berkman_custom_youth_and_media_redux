@@ -65,16 +65,13 @@
 	 */
 	wp_head();
 ?>
-<script type="text/javascript">
-   var disqus_developer = 1; // this would set it to developer mode
-</script>
 </head>
 
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed">
 	<header id="branding" role="banner">
 			<hgroup>
-				<h1 id="site-title"><span><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span></h1>
+				<h1 id="site-title"><span><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><img src="<?php echo get_stylesheet_directory_uri() . '/images/youthandmedia-logo.png'; ?>" alt="<?php bloginfo( 'name' ); ?>" /></a></span></h1>
 				<h2 id="site-description"><?php bloginfo( 'description' ); ?></h2>
 			</hgroup>
 
@@ -122,22 +119,5 @@
 			</nav><!-- #access -->
 	</header><!-- #branding -->
 
-	<?php
-	$flickr_tags = get_the_terms( $post->ID, 'flickr_tags' ); 
-	$flickr_attr = array(
-		'image_class' => 'viz1-image',
-		'id' => 'viz1',
-		'class' => '',
-		'size' => 'm'
-	);
-	if ( ! empty( $flickr_tags ) ): 
-		$tags = array();
-		foreach ($flickr_tags as $tag) {
-			$tags[] = $tag->name;
-		}
-		$flickr_attr['tags'] = implode(',', $tags);
-	endif; 
-	echo create_flickr_gallery($flickr_attr);
-	?>
 
 	<div id="main">

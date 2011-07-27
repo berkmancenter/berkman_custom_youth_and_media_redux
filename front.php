@@ -26,9 +26,8 @@ get_header(); ?>
 			<?php if ( have_posts() ) : ?>
 
 				<?php twentyeleven_content_nav( 'nav-above' ); ?>
-				<?php query_posts(array(
-					'post_type' => array('page', 'post')
-				)); ?>
+
+				<?php query_posts(array( 'post_type' => array('post'))); ?>
 
 				<?php /* Start the Loop */ ?>
 				<?php while ( have_posts() ) : the_post(); ?>

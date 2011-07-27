@@ -18,11 +18,35 @@ body {
 #branding {
 	border: 0;
 }
-#branding img {
+/*#branding img {
 	max-height: 200px;
+}*/
+#branding hgroup {
+	margin-left: 0;
+}
+#site-description {
+	margin: 20px 0;
+}
+#site-title {
+	padding-top: 1.5em;
 }
 #content {
 	margin-left: 0;
+}
+#access {
+	background: transparent;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	border: 1px solid #EEE;
+	border-width: 1px 0;
+}
+#access a {
+	color: #777;
+	line-height: 2em;
+	font-size: 120%;
+}
+#access ul ul {
+	top: 2em;
 }
 .block {
 	position: relative;
@@ -95,4 +119,8 @@ body {
 .viz1-image {
 	height: 180px;
 	padding: 0 10px;
+}
+.sociable img {
+	width: 64px !important;
+	height: 64px !important;
 }
