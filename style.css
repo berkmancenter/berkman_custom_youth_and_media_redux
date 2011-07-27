@@ -32,6 +32,8 @@ body {
 }
 #content {
 	margin-left: 0;
+	width: 70%;
+	margin-right: 25%;
 }
 #access {
 	background: transparent;
@@ -39,6 +41,7 @@ body {
 	-webkit-box-shadow: none;
 	border: 1px solid #EEE;
 	border-width: 1px 0;
+	text-transform: uppercase;
 }
 #access a {
 	color: #777;
@@ -47,6 +50,26 @@ body {
 }
 #access ul ul {
 	top: 2em;
+}
+#access div {
+	margin-left: 1%;
+}
+#secondary {
+	width: 25%;
+	margin-right: 0;
+}
+.widget {
+	padding-bottom: 2.2em;
+	border-bottom: 2px dashed #EEE;
+}
+.widget-title {
+	font-size: 120%;
+}
+.rsswidget img {
+	display: none;
+}
+.sponsors, .social-links {
+	text-align: center;
 }
 .block {
 	position: relative;
@@ -99,13 +122,13 @@ body {
 	background-color: black !important;
 }
 .flickr-gallery {
-	width: 200px;
-	height: 200px;
+	height: 170px;
 	overflow: hidden;
+	line-height: 1em;
 }
 .flickr-image {
 	width: 80px;
-	margin: 10px;
+	margin: 4px;
 }
 .social-links img {
 	margin: 5px;
