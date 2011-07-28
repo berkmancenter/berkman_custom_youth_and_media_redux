@@ -32,8 +32,8 @@ body {
 }
 #content {
 	margin-left: 0;
-	width: 70%;
-	margin-right: 25%;
+	width: 60%;
+	height: 1100px;
 }
 #access {
 	background: transparent;
@@ -130,6 +130,9 @@ body {
 	width: 80px;
 	margin: 4px;
 }
+.flickr-li {
+	display: inline-block;
+}
 .social-links img {
 	margin: 5px;
 }
@@ -138,6 +141,7 @@ body {
 	overflow: hidden;
 	white-space: nowrap;
 	width: 100%;
+	margin: 0;
 }
 .viz1-image {
 	height: 180px;

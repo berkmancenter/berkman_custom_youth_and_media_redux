@@ -27,6 +27,7 @@ get_header(); ?>
 
 				<?php twentyeleven_content_nav( 'nav-above' ); ?>
 
+				<?php //wp_reset_postdata(); ?>
 				<?php query_posts(array( 'post_type' => array('post'))); ?>
 
 				<?php /* Start the Loop */ ?>

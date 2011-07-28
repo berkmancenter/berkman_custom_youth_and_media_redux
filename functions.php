@@ -4,15 +4,16 @@ define('FLICKR_API_KEY', '5687af375108fc3d342075b21af266e7');
 
 function on_init() {
 	register_taxonomy(
-		'formats',
+		'post_contains',
 		array('post', 'page'),
 		array(
-			'label' => __('Formats'),
+			'label' => __('Post Contains'),
 			'labels' => array(
-				'name' => _x('Post Formats', 'taxonomy general name'),
-				'singular_name' => _x('Category', 'taxonomy singular name')
+				'name' => _x('Post Contains', 'taxonomy general name'),
+				'singular_name' => _x('Format', 'taxonomy singular name')
 			),
-			'public' => false
+			'hierarchical' => true,
+			'public' => true
 		)
 	);
 			
@@ -54,6 +55,7 @@ function on_init() {
 
 	populate_flickr_taxonomy(FLICKR_NSID);
 	populate_block_size_taxonomy();
+	populate_post_contains_taxonomy();
 	remove_filter( 'body_class', 'twentyeleven_body_classes' );
 }
 
@@ -76,10 +78,19 @@ function populate_block_size_taxonomy() {
 	}	
 }
 
+function populate_post_contains_taxonomy() {
+	$types = array('Text', 'Images', 'Video', 'PDF', 'Audio');
+	foreach ($types as $type) {
+		wp_insert_term($type, 'post_contains');
+	}	
+}
+
 function add_format_categories($post_id) {
+	error_log('post id: '.print_r($post_id, true));
 	while (wp_is_post_revision($post_id)) {
 		$post_id = wp_is_post_revision($post_id);
 	}
+	error_log('new post id: '.print_r($post_id, true));
 	$mime_type_to_category = array(‘image’ => ‘Image’, ‘video’ => ‘Video’, ‘pdf’ => ‘PDF’, ‘audio’ => ‘Audio’);
 	$post_contains = array('Text');
 	$children = get_children(array(‘post_type’ => ‘attachment’, ‘post_parent’ => $post_id));
@@ -89,8 +100,14 @@ function add_format_categories($post_id) {
 			$post_contains[] = $mime_type_to_category[$mime_type];
 		}
 	}
+	global $wp_taxonomies;
 	$post_contains = array_unique($post_contains);
-	wp_set_object_terms($post_id, $post_contains, ‘post_contains’, false);
+	error_log('taxonomies: '.print_r(get_taxonomies(), true));
+	error_log('exists: '.taxonomy_exists('category'));
+	error_log('real taxonomies: '.print_r($wp_taxonomies, true));
+	error_log('post type: '.get_post_type($post_id));
+	error_log('post contains: '.print_r($post_contains, TRUE));
+	error_log('result: '.print_r(wp_set_object_terms($post_id, $post_contains, ‘category’), TRUE));
 }
 
 function create_calendar_iframe($attributes) {
@@ -135,6 +152,7 @@ function create_flickr_gallery($attributes) {
 	extract( shortcode_atts( array(
 		'flickr_nsid' => FLICKR_NSID,
 		'class' => 'flickr-gallery',
+		'li_class' => 'flickr-li',
 		'image_class' => 'flickr-image',
 		'id' => false,
 		'size' => 's',
@@ -151,16 +169,84 @@ function create_flickr_gallery($attributes) {
 	if (!empty($class)) {
 		$class = 'class="'.$class.'"';
 	}
-	$html = '<div '.$id.' '.$class.'>';
+	wp_register_script('slideshow', get_stylesheet_directory_uri() . '/js/slideshow.js', array('jquery'));
+	wp_enqueue_script('slideshow');
+	$html = '<ul '.$id.' '.$class.'>';
 	$url = 'http://api.flickr.com/services/rest/?method=flickr.photos.search&per_page='.$results.'&api_key='.FLICKR_API_KEY.'&user_id='.$flickr_nsid.'&'.$tags.'format=php_serial&nojsoncallback=1';
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$output = unserialize(curl_exec($ch));
 
 	foreach ($output['photos']['photo'] as $photo) {
-		$html .= '<img class="'.$image_class.'" alt="' . $photo['title'] . '" src="http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_'.$size.'.jpg" />';
+		$html .= '<li class="'.$li_class.'"><img class="'.$image_class.'" alt="' . $photo['title'] . '" src="http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_'.$size.'.jpg" /></li>';
 	}
-	return $html.'</div>';
+	return $html.'</ul>';
+}
+
+function create_video_gallery($attributes) {
+	extract( shortcode_atts( array(
+		'search_term' => 'author:JustinInEgypt',
+		'results' => 24
+	), $attributes ) );
+	$html = '
+					<!-- ++Begin Video Bar Wizard Generated Code++ -->
+					  <!--
+					  // Created with a Google AJAX Search Wizard
+					  // http://code.google.com/apis/ajaxsearch/wizards.html
+					  -->
+
+					  <!--
+					  // The Following div element will end up holding the actual videobar.
+					  // You can place this anywhere on your page.
+					  -->
+					  <div id="videoBar-bar">
+					    <span style="color:#fff;font-size:11px;margin:10px;padding:4px;">Loading...</span>
+					  </div>
+
+					  <!-- Ajax Search Api and Stylesheet
+					  // Note: If you are already using the AJAX Search API, then do not include it
+					  //       or its stylesheet again
+					  -->
+					  <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;source=uds-vbw"
+					    type="text/javascript"></script>
+
+					  <!-- Video Bar Code and Stylesheet -->
+					  <script type="text/javascript">
+					    window._uds_vbw_donotrepair = true;
+					  </script>
+					  <script src="http://www.google.com/uds/solutions/videobar/gsvideobar.js?mode=new"
+					    type="text/javascript"></script>
+
+					  <style type="text/css">
+					    .playerInnerBox_gsvb .player_gsvb {
+					      width : 320px;
+					      height : 260px;
+					    }
+					  </style>
+					  <script type="text/javascript">
+					    function LoadVideoBar() {
+
+					    var videoBar;
+					    var options = {
+					        largeResultSet : false,
+					        horizontal : false,
+					        autoExecuteList : {
+					          cycleTime : 0,
+					          cycleMode : GSvideoBar.CYCLE_MODE_LINEAR,
+					          executeList : ["'.$search_term.'"]
+					        }
+					      }
+
+					    videoBar = new GSvideoBar(document.getElementById("videoBar-bar"),
+					                              GSvideoBar.PLAYER_ROOT_FLOATING,
+					                              options);
+					    }
+					    // arrange for this function to be called during body.onload
+					    // event processing
+					    GSearch.setOnLoadCallback(LoadVideoBar);
+					  </script>
+					<!-- ++End Video Bar Wizard Generated Code++ -->';
+	return $html;
 }
 
 function alter_body_classes( $classes ) {
@@ -179,7 +265,8 @@ add_shortcode( 'google-calendar', 'create_calendar_iframe' );
 add_shortcode( 'flickr-gallery', 'create_flickr_gallery' );
 add_shortcode( 'sponsors', 'create_sponsor_block' );
 add_shortcode( 'social-links', 'create_social_block' );
+add_shortcode( 'video-gallery', 'create_video_gallery' );
 add_filter('widget_text', 'do_shortcode');
-add_action('post_updated', 'add_format_categories');
+//add_action('publish_post', 'add_format_categories', 100);
 add_action('init', 'on_init');
 add_filter('body_class', 'alter_body_classes');

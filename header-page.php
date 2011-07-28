@@ -139,5 +139,4 @@
 	endif; 
 	echo create_flickr_gallery($flickr_attr);
 	?>
-
 	<div id="main">
