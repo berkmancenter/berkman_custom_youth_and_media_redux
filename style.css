@@ -18,9 +18,9 @@ body {
 #branding {
 	border: 0;
 }
-/*#branding img {
-	max-height: 200px;
-}*/
+#branding img {
+	width: auto;
+}
 #branding hgroup {
 	margin-left: 0;
 }
@@ -32,8 +32,8 @@ body {
 }
 #content {
 	margin-left: 0;
-	width: 60%;
-	height: 1100px;
+	width: 74%;
+	height: 1000px;
 }
 #access {
 	background: transparent;
@@ -47,6 +47,9 @@ body {
 	color: #777;
 	line-height: 2em;
 	font-size: 120%;
+}
+#access .sub-menu a {
+	z-index: 999;
 }
 #access ul ul {
 	top: 2em;
@@ -76,6 +79,9 @@ body {
 	padding: 0;
 	margin: 10px;
 }
+.block-link:hover {
+	text-decoration: none;
+}
 .featured {
 	height: 420px;
 	width: 420px;
@@ -104,8 +110,9 @@ body {
 	padding: 10px 0;
 	max-height: 180px;
 	overflow: hidden;
+	white-space: nowrap;
 }
-.post-title, .post-excerpt {
+.post-title, .post-excerpt, .post-contains-icons {
 	margin: 0 10px;
 }
 .post-title {
@@ -114,9 +121,14 @@ body {
 .post-excerpt {
 	font-size: 85%;
 	display: none;
+	white-space: normal;
 }
 .post-excerpt p {
 	margin-bottom: 0;
+}
+.post-contains-icons {
+	float: right;
+	padding-top: 4px;
 }
 .view-cap, .view-container-border {
 	background-color: black !important;
@@ -156,4 +168,30 @@ body {
 }
 .sociable_tagline {
 	text-align: left;
+}
+.isotope-item {
+  z-index: 1;
+}
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 0;
+}
+.isotope,
+.isotope .isotope-item {
+  /* change duration value to whatever you like */
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+          transition-property:         transform, opacity;
 }

@@ -21,11 +21,20 @@ wp_enqueue_script('youth-and-media');
 get_header(); ?>
 
 		<div id="primary">
+				<div id="filters">
+					<button id="showall">show all</button>
+					<label for="audio">audio</label><input type="checkbox" id="audio" value=".Audio" />
+					<label for="video">video</label><input type="checkbox" id="video" value=".Video" />
+					<label for="document">documents</label><input type="checkbox" id="document" value=".Document" />
+					<label for="image">images</label><input type="checkbox" id="image" value=".Image" />
+					<label for="text">text</label><input type="checkbox" id="text" value=".Text" />
+				</div>
 			<div id="content" role="main">
 
 			<?php if ( have_posts() ) : ?>
 
 				<?php twentyeleven_content_nav( 'nav-above' ); ?>
+
 
 				<?php //wp_reset_postdata(); ?>
 				<?php query_posts(array( 'post_type' => array('post'))); ?>

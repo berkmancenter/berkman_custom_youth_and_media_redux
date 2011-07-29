@@ -79,9 +79,11 @@ function populate_block_size_taxonomy() {
 }
 
 function populate_post_contains_taxonomy() {
-	$types = array('Text', 'Images', 'Video', 'PDF', 'Audio');
+	$types = array('Text', 'Image', 'Video', 'Document', 'Audio');
 	foreach ($types as $type) {
-		wp_insert_term($type, 'post_contains');
+		if ( ! term_exists( $type, 'post_contains' ) ) {
+			wp_insert_term($type, 'post_contains');
+		}
 	}	
 }
 
@@ -91,7 +93,7 @@ function add_format_categories($post_id) {
 		$post_id = wp_is_post_revision($post_id);
 	}
 	error_log('new post id: '.print_r($post_id, true));
-	$mime_type_to_category = array(‘image’ => ‘Image’, ‘video’ => ‘Video’, ‘pdf’ => ‘PDF’, ‘audio’ => ‘Audio’);
+	$mime_type_to_category = array(‘image’ => ‘Image’, ‘video’ => ‘Video’, ‘pdf’ => ‘Document’, ‘audio’ => ‘Audio’);
 	$post_contains = array('Text');
 	$children = get_children(array(‘post_type’ => ‘attachment’, ‘post_parent’ => $post_id));
 	foreach ($children as $child_id => $child) {
