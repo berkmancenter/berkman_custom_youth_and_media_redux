@@ -57,6 +57,7 @@ function on_init() {
 	populate_block_size_taxonomy();
 	populate_post_contains_taxonomy();
 	remove_filter( 'body_class', 'twentyeleven_body_classes' );
+	remove_filter( 'the_excerpt', 'sociable_display_hook' );
 }
 
 
@@ -116,7 +117,7 @@ function create_calendar_iframe($attributes) {
 	extract( shortcode_atts( array(
 		'height' => '300',
 		'width' => '250',
-		'src' => '',
+		'src' => 'en.usa#holiday@group.v.calendar.google.com',
 		'bgcolor' => 'FFFFFF',
 		'color' => 'A32929',
 		'mode' => 'AGENDA'
@@ -156,8 +157,9 @@ function create_flickr_gallery($attributes) {
 		'class' => 'flickr-gallery',
 		'li_class' => 'flickr-li',
 		'image_class' => 'flickr-image',
-		'id' => false,
+		'id' => 'flickr',
 		'size' => 's',
+		'rows' => 2,
 		'tags' => '',
 		'results' => 24
 	), $attributes ) );
@@ -173,21 +175,27 @@ function create_flickr_gallery($attributes) {
 	}
 	wp_register_script('slideshow', get_stylesheet_directory_uri() . '/js/slideshow.js', array('jquery'));
 	wp_enqueue_script('slideshow');
-	$html = '<ul '.$id.' '.$class.'>';
+	$html = '<div '.$id.'><ul '.$class.'>';
 	$url = 'http://api.flickr.com/services/rest/?method=flickr.photos.search&per_page='.$results.'&api_key='.FLICKR_API_KEY.'&user_id='.$flickr_nsid.'&'.$tags.'format=php_serial&nojsoncallback=1';
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$output = unserialize(curl_exec($ch));
+	$photos = $output['photos']['photo'];
+	$count = 0;
 
-	foreach ($output['photos']['photo'] as $photo) {
+	foreach ($photos as $photo) {
 		$html .= '<li class="'.$li_class.'"><img class="'.$image_class.'" alt="' . $photo['title'] . '" src="http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_'.$size.'.jpg" /></li>';
+		if ($rows > 1 && $count == floor(count($photos) / $rows)) {
+			$html .= '</ul><ul '.$class.'>';
+		}
+		$count++;
 	}
-	return $html.'</ul>';
+	return $html.'</ul></div>';
 }
 
 function create_video_gallery($attributes) {
 	extract( shortcode_atts( array(
-		'search_term' => 'author:JustinInEgypt',
+		'search_term' => 'youth and media',
 		'results' => 24
 	), $attributes ) );
 	$html = '
@@ -235,7 +243,7 @@ function create_video_gallery($attributes) {
 					        autoExecuteList : {
 					          cycleTime : 0,
 					          cycleMode : GSvideoBar.CYCLE_MODE_LINEAR,
-					          executeList : ["'.$search_term.'"]
+					          executeList : ["'.urlencode($search_term).'"]
 					        }
 					      }
 

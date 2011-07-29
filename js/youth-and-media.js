@@ -18,10 +18,13 @@ jQuery(document).ready(function() {
 		'mouseenter': function(e) { jQuery(e.target).find('.post-excerpt').slideDown('fast'); }
 	});
 	jQuery('#filters :checkbox').click(function(){
-		var selector = jQuery.map(jQuery('#filters :checked'), function(elem) { return jQuery(elem).val(); }).toString().replace(',', '');
-		jQuery('#content').isotope({ filter: selector });
+		jQuery('label[for="' + jQuery(this).attr('id') + '"]').toggleClass('filter-active');
+		var isotopeSelector = jQuery.map(jQuery('#filters :checked'), function(elem) { return jQuery(elem).val(); }).toString().replace(/,/g, '');
+		console.log(isotopeSelector);
+		jQuery('#content').isotope({ filter: isotopeSelector });
 	});
 	jQuery('#showall').click(function() {
+		jQuery('#filters label').removeClass('filter-active');
 		jQuery('#filters :checkbox').removeAttr('checked');
 		jQuery('#content').isotope({ filter: '*' });
 	});

@@ -1,6 +1,9 @@
 <?php
 $block_sizes = get_the_terms($post->ID, 'block_sizes');
-$post_contains = array_map(function($term) { return $term->name; }, get_the_terms( $post->ID, 'post_contains' ));
+$post_contains = array();
+if (!empty(get_the_terms( $post->ID, 'post_contains' ))) {
+	$post_contains = array_map(function($term) { return $term->name; }, get_the_terms( $post->ID, 'post_contains' ));
+}
 ?>
 <?php if (has_post_thumbnail( $post->ID ) && $block_sizes): ?>
 <?php $block_size = reset($block_sizes)->slug; ?>

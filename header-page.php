@@ -63,11 +63,16 @@
 	 * generally use this hook to add elements to <head> such
 	 * as styles, scripts, and meta tags.
 	 */
+	wp_register_script('jcarousel', get_stylesheet_directory_uri() . '/js/jcarousel/lib/jquery.jcarousel.js', array('jquery'));
+	wp_enqueue_script('jcarousel');
+	wp_register_script('slideshow', get_stylesheet_directory_uri() . '/js/slideshow.js', array('jcarousel'));
+	wp_enqueue_script('slideshow');
 	wp_head();
 ?>
 <script type="text/javascript">
    var disqus_developer = 1; // this would set it to developer mode
 </script>
+	<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri() . '/js/jcarousel/skins/tango/skin.css'; ?>" />
 </head>
 
 <body <?php body_class(); ?>>
@@ -128,7 +133,8 @@
 		'image_class' => 'viz1-image',
 		'id' => 'viz1',
 		'class' => '',
-		'size' => 'm'
+		'size' => 'm',
+		'rows' => 1
 	);
 	if ( ! empty( $flickr_tags ) ): 
 		$tags = array();
