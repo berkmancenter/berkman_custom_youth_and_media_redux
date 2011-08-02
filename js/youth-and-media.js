@@ -28,4 +28,11 @@ jQuery(document).ready(function() {
 		jQuery('#filters :checkbox').removeAttr('checked');
 		jQuery('#content').isotope({ filter: '*' });
 	});
+	jQuery('.flickr-gallery').jcarousel({
+		auto: 0.001,
+		itemFallbackDimension: 75,
+		wrap: 'circular',
+		easing: 'linear',
+		animation: 20000 
+	});
 });

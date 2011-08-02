@@ -1,7 +1,7 @@
 <?php
 $block_sizes = get_the_terms($post->ID, 'block_sizes');
-$post_contains = array();
-if (!empty(get_the_terms( $post->ID, 'post_contains' ))) {
+$post_contains = get_the_terms( $post->ID, 'post_contains' );
+if (!empty($post_contains)) {
 	$post_contains = array_map(function($term) { return $term->name; }, get_the_terms( $post->ID, 'post_contains' ));
 }
 ?>

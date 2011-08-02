@@ -15,6 +15,8 @@
 
 wp_register_script('isotope', get_stylesheet_directory_uri() . '/js/jquery.isotope.min.js', array('jquery') );
 wp_register_script('youth-and-media', get_stylesheet_directory_uri() . '/js/youth-and-media.js', array('isotope') );
+wp_register_script('jcarousel', get_stylesheet_directory_uri() . '/js/jcarousel/lib/jquery.jcarousel.js', array('jquery'));
+wp_enqueue_script('jcarousel');
 wp_enqueue_script('isotope');
 wp_enqueue_script('youth-and-media');
 

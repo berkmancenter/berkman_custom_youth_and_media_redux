@@ -136,6 +136,9 @@ h2 {
 .view-cap, .view-container-border {
 	background-color: black !important;
 }
+#flickr {
+	overflow: hidden;
+}
 .flickr-gallery {
 	width: 260px;
 	overflow: hidden;
@@ -159,11 +162,6 @@ h2 {
 	white-space: nowrap;
 	width: 100%;
 	margin: 0;
-}
-.viz1-image {
-	height: 180px;
-	padding: 0 10px;
-	display: inline-block;
 }
 .sociable img {
 	width: 64px !important;

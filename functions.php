@@ -154,7 +154,8 @@ function create_social_block($attributes) {
 function create_flickr_gallery($attributes) {
 	extract( shortcode_atts( array(
 		'flickr_nsid' => FLICKR_NSID,
-		'class' => 'flickr-gallery',
+		'ul_class' => 'flickr-gallery',
+		'ul_id' => '',
 		'li_class' => 'flickr-li',
 		'image_class' => 'flickr-image',
 		'id' => 'flickr',
@@ -167,15 +168,18 @@ function create_flickr_gallery($attributes) {
 	if ($id) {
 		$id = 'id="'.$id.'"';
 	}
+	if ($ul_id) {
+		$ul_id = 'id="'.$ul_id.'"';
+	}
 	if (!empty($tags)) {
 		$tags = 'tags='.$tags.'&';
 	}
-	if (!empty($class)) {
-		$class = 'class="'.$class.'"';
+	if (!empty($ul_class)) {
+		$ul_class = 'class="'.$ul_class.'"';
 	}
 	wp_register_script('slideshow', get_stylesheet_directory_uri() . '/js/slideshow.js', array('jquery'));
 	wp_enqueue_script('slideshow');
-	$html = '<div '.$id.'><ul '.$class.'>';
+	$html = '<div '.$id.'><ul '.$ul_id.' '.$ul_class.'>';
 	$url = 'http://api.flickr.com/services/rest/?method=flickr.photos.search&per_page='.$results.'&api_key='.FLICKR_API_KEY.'&user_id='.$flickr_nsid.'&'.$tags.'format=php_serial&nojsoncallback=1';
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -186,7 +190,7 @@ function create_flickr_gallery($attributes) {
 	foreach ($photos as $photo) {
 		$html .= '<li class="'.$li_class.'"><img class="'.$image_class.'" alt="' . $photo['title'] . '" src="http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_'.$size.'.jpg" /></li>';
 		if ($rows > 1 && $count == floor(count($photos) / $rows)) {
-			$html .= '</ul><ul '.$class.'>';
+			$html .= '</ul><ul '.$ul_class.'>';
 		}
 		$count++;
 	}

@@ -130,9 +130,11 @@
 	<?php
 	$flickr_tags = get_the_terms( $post->ID, 'flickr_tags' ); 
 	$flickr_attr = array(
-		'image_class' => 'viz1-image',
 		'id' => 'viz1',
-		'class' => '',
+		'ul_class' => 'jcarousel-skin-tango',
+		'ul_id' => 'mycarousel',
+		'li_class' => '',
+		'image_class' => '',
 		'size' => 'm',
 		'rows' => 1
 	);
