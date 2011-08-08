@@ -269,7 +269,7 @@ function alter_body_classes( $classes ) {
 		$classes[] = 'single-author';
 	}
 
-	if ( is_singular() && ! is_home() && ! is_front_page() && ! is_page_template( 'showcase.php' ) && ! is_page_template( 'sidebar-page.php' ) && ! is_page() )
+	if ( is_singular() && ! is_home() && ! is_front_page() && ! is_page_template( 'showcase.php' ) && ! is_page_template( 'sidebar-page.php' ) && ! is_page() && ! is_single())
 		$classes[] = 'singular';
 
 	return $classes;
