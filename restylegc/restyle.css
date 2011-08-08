@@ -1253,6 +1253,8 @@ body {
 	white-space:nowrap;
 	margin:0;
 	overflow:hidden;
+    color: #777 !important;
+    border-bottom: 1px dotted #777;
 }
 
 .agenda .title-wrapper {
@@ -1307,6 +1309,7 @@ body {
 .agenda .date-label, .agenda .underflow-bot, .agenda .underflow-top {
 	padding:.2em 1em;
     padding-left: 0;
+    margin-top: 1em;
 }
 
 .agenda .underflow-top {
