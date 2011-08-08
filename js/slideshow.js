@@ -5,7 +5,7 @@ jQuery(document).ready(function() {
 		itemFallbackDimension: 200000,
 		scroll: numSlides,
 		wrap: 'circular',
-		animation: 10000 * numSlides,
+		animation: 15000 * numSlides,
 		size: numSlides,
 		easing: 'linear'
 	});

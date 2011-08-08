@@ -355,7 +355,7 @@ div.resultDiv_gsvb {
   border-style : solid;
   background-color : #000000;
   text-align : center;
-  margin: 20px;
+  margin: 5px;
 }
 
 div.smallResultDiv_gsvb {
@@ -367,8 +367,8 @@ div.smallResultDiv_gsvb {
 div.resultDiv_gsvb img {
   cursor : pointer;
   display : inline;
-  width: 120%;
-  height: 120%;
+  width: 200px;
+  height: 150px;
 }
 
 /* Auto Execute List Status Box */

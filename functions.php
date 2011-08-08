@@ -126,7 +126,7 @@ function create_calendar_iframe($attributes) {
 		$src = 'src='.urlencode($src).'&amp;';
 	}
 
-	$src = '<iframe class="google-calendar" src="https://www.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height='.$height.'&amp;wkst=1&amp;mode='.strtoupper($mode).'&amp;bgcolor=%23'.$bgcolor.'&amp;'.$src.'color=%23'.$color.'&amp;ctz=America%2FNew_York" style=" border-width:0 " width="'.$width.'" height="'.$height.'" frameborder="0" scrolling="no"></iframe>';
+	$src = '<iframe class="google-calendar" src="'.get_stylesheet_directory_uri().'/restylegc/restylegc.php?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height='.$height.'&amp;wkst=1&amp;mode='.strtoupper($mode).'&amp;bgcolor=%23'.$bgcolor.'&amp;'.$src.'color=%23'.$color.'&amp;ctz=America%2FNew_York" style=" border-width:0 " width="'.$width.'" height="'.$height.'" frameborder="0" scrolling="no"></iframe>';
 
 	return $src;
 }
@@ -199,7 +199,7 @@ function create_flickr_gallery($attributes) {
 
 function create_video_gallery($attributes) {
 	extract( shortcode_atts( array(
-		'search_term' => 'youth and media',
+		'search_term' => 'berkman center',
 		'results' => 24
 	), $attributes ) );
 	$html = '
