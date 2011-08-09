@@ -146,7 +146,7 @@ function create_social_block($attributes) {
 		$src = 'src='.urlencode($src).'&amp;';
 	}
 
-	$src = '<div class="social-links"><a href=""><img src="'.get_stylesheet_directory_uri().'/images/social-icons/twitter.png" alt="Twitter" /></a><a href=""><img src="'.get_stylesheet_directory_uri().'/images/social-icons/facebook.png" alt="Facebook" /></a></div>';
+	$src = '<div class="social-links"><a href=""><img src="'.get_stylesheet_directory_uri().'/images/social-icons/twitter-64.png" alt="Twitter" /></a><a href=""><img src="'.get_stylesheet_directory_uri().'/images/social-icons/facebook-64.png" alt="Facebook" /></a></div>';
 
 	return $src;
 }
