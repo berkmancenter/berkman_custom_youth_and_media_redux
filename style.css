@@ -171,7 +171,7 @@ h2 {
 	text-align: center;
 }
 .sociable_tagline {
-	text-align: left;
+    margin-bottom: 1em;
 }
 .isotope-item {
   z-index: 1;
