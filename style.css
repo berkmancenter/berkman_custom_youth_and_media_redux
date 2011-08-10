@@ -398,3 +398,14 @@ div.statusItemSelected_gsvb {
 #videoBar-bar {
 	text-align: center;
 }
+#simplemodal-overlay {
+    background-color:#000;
+}
+#simplemodal-container {
+    padding: 15px;
+    background-color: #000;
+}
+.youtube-video {
+    text-align: right;
+    margin-bottom: 5px;
+}

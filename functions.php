@@ -4,13 +4,27 @@ define('FLICKR_API_KEY', '5687af375108fc3d342075b21af266e7');
 
 function on_init() {
 	register_taxonomy(
+		'post_formats',
+		array('post', 'page'),
+		array(
+			'label' => __('Post Formats'),
+			'labels' => array(
+				'name' => _x('Post Formats', 'taxonomy general name'),
+				'singular_name' => _x('Format', 'taxonomy singular name')
+			),
+			'hierarchical' => true,
+			'public' => true
+		)
+	);
+
+	register_taxonomy(
 		'post_contains',
 		array('post', 'page'),
 		array(
 			'label' => __('Post Contains'),
 			'labels' => array(
 				'name' => _x('Post Contains', 'taxonomy general name'),
-				'singular_name' => _x('Format', 'taxonomy singular name')
+				'singular_name' => _x('Type', 'taxonomy singular name')
 			),
 			'hierarchical' => true,
 			'public' => true
@@ -55,6 +69,7 @@ function on_init() {
 
 	populate_flickr_taxonomy(FLICKR_NSID);
 	populate_block_size_taxonomy();
+	populate_post_formats_taxonomy();
 	populate_post_contains_taxonomy();
 	remove_filter( 'body_class', 'twentyeleven_body_classes' );
 	remove_filter( 'the_excerpt', 'sociable_display_hook' );
@@ -79,38 +94,22 @@ function populate_block_size_taxonomy() {
 	}	
 }
 
+function populate_post_formats_taxonomy() {
+	$formats = array('Text', 'Image', 'Video', 'Document', 'Audio');
+	foreach ($formats as $format) {
+		if ( ! term_exists($format, 'post_formats') ) {
+			wp_insert_term($format, 'post_formats');
+		}
+	}	
+}
+
 function populate_post_contains_taxonomy() {
-	$types = array('Text', 'Image', 'Video', 'Document', 'Audio');
+	$types = array('Interview', 'Workshop', 'Paper');
 	foreach ($types as $type) {
 		if ( ! term_exists( $type, 'post_contains' ) ) {
 			wp_insert_term($type, 'post_contains');
 		}
 	}	
-}
-
-function add_format_categories($post_id) {
-	error_log('post id: '.print_r($post_id, true));
-	while (wp_is_post_revision($post_id)) {
-		$post_id = wp_is_post_revision($post_id);
-	}
-	error_log('new post id: '.print_r($post_id, true));
-	$mime_type_to_category = array(‘image’ => ‘Image’, ‘video’ => ‘Video’, ‘pdf’ => ‘Document’, ‘audio’ => ‘Audio’);
-	$post_contains = array('Text');
-	$children = get_children(array(‘post_type’ => ‘attachment’, ‘post_parent’ => $post_id));
-	foreach ($children as $child_id => $child) {
-		$mime_type = get_post_mime_type($child_id);
-		if (array_key_exists($mime_type, $mime_type_to_category)) {
-			$post_contains[] = $mime_type_to_category[$mime_type];
-		}
-	}
-	global $wp_taxonomies;
-	$post_contains = array_unique($post_contains);
-	error_log('taxonomies: '.print_r(get_taxonomies(), true));
-	error_log('exists: '.taxonomy_exists('category'));
-	error_log('real taxonomies: '.print_r($wp_taxonomies, true));
-	error_log('post type: '.get_post_type($post_id));
-	error_log('post contains: '.print_r($post_contains, TRUE));
-	error_log('result: '.print_r(wp_set_object_terms($post_id, $post_contains, ‘category’), TRUE));
 }
 
 function create_calendar_iframe($attributes) {
@@ -263,6 +262,14 @@ function create_video_gallery($attributes) {
 	return $html;
 }
 
+function create_youtube_video( $attributes ) {
+	extract( shortcode_atts( array(
+		'id' => '79IYZVYIVLA',
+	), $attributes ) );
+    $html = '<div class="youtube-video"><a class="youtube-video-link" href="http://youtu.be/'.$id.'" target="_blank"><img src="http://i.ytimg.com/vi/'.$id.'/hqdefault.jpg" /></a></div>';
+    return $html;
+}
+
 function alter_body_classes( $classes ) {
 
 	if ( ! is_multi_author() ) {
@@ -280,7 +287,7 @@ add_shortcode( 'flickr-gallery', 'create_flickr_gallery' );
 add_shortcode( 'sponsors', 'create_sponsor_block' );
 add_shortcode( 'social-links', 'create_social_block' );
 add_shortcode( 'video-gallery', 'create_video_gallery' );
+add_shortcode( 'youtube-video', 'create_youtube_video' );
 add_filter('widget_text', 'do_shortcode');
-//add_action('publish_post', 'add_format_categories', 100);
 add_action('init', 'on_init');
 add_filter('body_class', 'alter_body_classes');

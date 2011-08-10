@@ -30,19 +30,23 @@ $query_string = "
 ";
 
 $pageposts = $wpdb->get_results($query_string, OBJECT);
+$filters = get_terms('post_contains', array('fields' => 'names'));
 
 get_header(); ?>
 
 		<div id="primary">
+                <?php if ( ! empty( $filters ) ): ?>
 				<h2>Only show posts with:</h2>
 				<div id="filters">
-					<label for="audio">audio</label><input type="checkbox" id="audio" value=".Audio" />
-					<label for="video">video</label><input type="checkbox" id="video" value=".Video" />
-					<label for="document">documents</label><input type="checkbox" id="document" value=".Document" />
-					<label for="image">images</label><input type="checkbox" id="image" value=".Image" />
-					<label for="text">text</label><input type="checkbox" id="text" value=".Text" />
+                    <?php foreach ($filters as $filter): ?>
+                    <label for="<?php echo strtolower($filter); ?>">
+                        <?php echo strtoupper($filter); ?>
+                    </label>
+                        <input type="checkbox" id="<?php echo strtolower($filter); ?>" value=".<?php echo strtolower($filter); ?>" />
+                    <?php endforeach; ?>
 					<button id="showall">show all</button>
 				</div>
+                <?php endif; ?>
 			<div id="content" role="main">
 
 			<?php if ($pageposts): ?>
