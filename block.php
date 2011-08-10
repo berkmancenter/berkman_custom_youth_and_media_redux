@@ -19,7 +19,7 @@ if (!empty($post_contains)) {
 		</span>
 		<?php endif; ?>
 		<span class="post-title"><?php the_title(); ?></span>
-		<div class="post-excerpt"><?php the_excerpt(); ?></div>
+		<div class="post-excerpt"><?php echo strip_tags(get_the_excerpt()); ?></div>
 	</div>
 </div>
 </a>
