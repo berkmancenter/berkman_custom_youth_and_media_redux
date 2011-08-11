@@ -20,7 +20,6 @@ jQuery(document).ready(function() {
 	jQuery('#filters :checkbox').click(function(){
 		jQuery('label[for="' + jQuery(this).attr('id') + '"]').toggleClass('filter-active');
 		var isotopeSelector = jQuery.map(jQuery('#filters :checked'), function(elem) { return jQuery(elem).val(); }).toString().replace(/,/g, '');
-		console.log(isotopeSelector);
 		jQuery('#content').isotope({ filter: isotopeSelector });
 	});
 	jQuery('#showall').click(function() {

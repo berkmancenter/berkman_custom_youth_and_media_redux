@@ -125,27 +125,7 @@ function create_calendar_iframe($attributes) {
 		$src = 'src='.urlencode($src).'&amp;';
 	}
 
-	$src = '<iframe class="google-calendar" src="'.get_stylesheet_directory_uri().'/restylegc/restylegc.php?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height='.$height.'&amp;wkst=1&amp;mode='.strtoupper($mode).'&amp;bgcolor=%23'.$bgcolor.'&amp;'.$src.'color=%23'.$color.'&amp;ctz=America%2FNew_York" style=" border-width:0 " height="'.$height.'" frameborder="0" scrolling="no"></iframe>';
-
-	return $src;
-}
-
-function create_sponsor_block($attributes) {
-	if (!empty($src)) {
-		$src = 'src='.urlencode($src).'&amp;';
-	}
-
-	$src = '<div class="sponsors"><a href="http://cyber.law.harvard.edu/" target="_blank"><img src="'.get_stylesheet_directory_uri().'/images/Berkman-140px.png" alt="Berkman Center" /></a><br /><a href="http://www.fir.unisg.ch/" target="_blank"><img src="'.get_stylesheet_directory_uri().'/images/StGallenFIRHSG.gif" alt="St Gallen" /></a></div>';
-
-	return $src;
-}
-
-function create_social_block($attributes) {
-	if (!empty($src)) {
-		$src = 'src='.urlencode($src).'&amp;';
-	}
-
-	$src = '<div class="social-links"><a href=""><img src="'.get_stylesheet_directory_uri().'/images/social-icons/twitter-64.png" alt="Twitter" /></a><a href=""><img src="'.get_stylesheet_directory_uri().'/images/social-icons/facebook-64.png" alt="Facebook" /></a></div>';
+    $src = '<iframe class="google-calendar" src="'.get_stylesheet_directory_uri().'/restylegc/restylegc.php?showTitle=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height='.$height.'&amp;wkst=1&amp;mode='.strtoupper($mode).'&amp;bgcolor=%23'.$bgcolor.'&amp;'.$src.'color=%23'.$color.'&amp;ctz=America%2FNew_York" style=" border-width:0 " height="'.$height.'" frameborder="0" scrolling="no"></iframe>';
 
 	return $src;
 }
@@ -196,72 +176,6 @@ function create_flickr_gallery($attributes) {
 	return $html.'</ul></div>';
 }
 
-function create_video_gallery($attributes) {
-	extract( shortcode_atts( array(
-		'search_term' => 'berkman center',
-		'results' => 24
-	), $attributes ) );
-	$html = '
-					<!-- ++Begin Video Bar Wizard Generated Code++ -->
-					  <!--
-					  // Created with a Google AJAX Search Wizard
-					  // http://code.google.com/apis/ajaxsearch/wizards.html
-					  -->
-
-					  <!--
-					  // The Following div element will end up holding the actual videobar.
-					  // You can place this anywhere on your page.
-					  -->
-					  <div id="videoBar-bar">
-					    <span style="color:#fff;font-size:11px;margin:10px;padding:4px;">Loading...</span>
-					  </div>
-
-					  <!-- Ajax Search Api and Stylesheet
-					  // Note: If you are already using the AJAX Search API, then do not include it
-					  //       or its stylesheet again
-					  -->
-					  <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;source=uds-vbw"
-					    type="text/javascript"></script>
-
-					  <!-- Video Bar Code and Stylesheet -->
-					  <script type="text/javascript">
-					    window._uds_vbw_donotrepair = true;
-					  </script>
-					  <script src="http://www.google.com/uds/solutions/videobar/gsvideobar.js?mode=new"
-					    type="text/javascript"></script>
-
-					  <style type="text/css">
-					    .playerInnerBox_gsvb .player_gsvb {
-					      width : 320px;
-					      height : 260px;
-					    }
-					  </style>
-					  <script type="text/javascript">
-					    function LoadVideoBar() {
-
-					    var videoBar;
-					    var options = {
-					        largeResultSet : false,
-					        horizontal : false,
-					        autoExecuteList : {
-					          cycleTime : 0,
-					          cycleMode : GSvideoBar.CYCLE_MODE_LINEAR,
-					          executeList : ["'.urlencode($search_term).'"]
-					        }
-					      }
-
-					    videoBar = new GSvideoBar(document.getElementById("videoBar-bar"),
-					                              GSvideoBar.PLAYER_ROOT_FLOATING,
-					                              options);
-					    }
-					    // arrange for this function to be called during body.onload
-					    // event processing
-					    GSearch.setOnLoadCallback(LoadVideoBar);
-					  </script>
-					<!-- ++End Video Bar Wizard Generated Code++ -->';
-	return $html;
-}
-
 function create_youtube_video( $attributes ) {
 	extract( shortcode_atts( array(
 		'id' => '79IYZVYIVLA',
@@ -284,8 +198,6 @@ function alter_body_classes( $classes ) {
 
 add_shortcode( 'google-calendar', 'create_calendar_iframe' );
 add_shortcode( 'flickr-gallery', 'create_flickr_gallery' );
-add_shortcode( 'sponsors', 'create_sponsor_block' );
-add_shortcode( 'social-links', 'create_social_block' );
 add_shortcode( 'video-gallery', 'create_video_gallery' );
 add_shortcode( 'youtube-video', 'create_youtube_video' );
 add_filter('widget_text', 'do_shortcode');
