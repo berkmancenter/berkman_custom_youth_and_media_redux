@@ -63,6 +63,8 @@
 	 * generally use this hook to add elements to <head> such
 	 * as styles, scripts, and meta tags.
 	 */
+	wp_register_script('page', get_stylesheet_directory_uri() . '/js/page.js', array('jquery'));
+	wp_enqueue_script('page');
 	wp_head();
 ?>
 </head>

@@ -63,10 +63,8 @@
 	 * generally use this hook to add elements to <head> such
 	 * as styles, scripts, and meta tags.
 	 */
-	wp_register_script('jcarousel', get_stylesheet_directory_uri() . '/js/jcarousel/lib/jquery.jcarousel.js', array('jquery'));
-	wp_enqueue_script('jcarousel');
-	wp_register_script('slideshow', get_stylesheet_directory_uri() . '/js/slideshow.js', array('jcarousel'));
-	wp_enqueue_script('slideshow');
+	wp_register_script('page', get_stylesheet_directory_uri() . '/js/page.js', array('jquery'));
+	wp_enqueue_script('page');
 	wp_head();
 ?>
 <script type="text/javascript">
