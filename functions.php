@@ -195,7 +195,7 @@ function alter_body_classes( $classes ) {
 	return $classes;
 }
 function my_excerpt_length($length) {
-    return 20;
+    return 10;
 }
 
 add_shortcode( 'google-calendar', 'create_calendar_iframe' );
@@ -203,6 +203,6 @@ add_shortcode( 'flickr-gallery', 'create_flickr_gallery' );
 add_shortcode( 'video-gallery', 'create_video_gallery' );
 add_shortcode( 'youtube-video', 'create_youtube_video' );
 add_filter('widget_text', 'do_shortcode');
-add_filter('excerpt_length', 'my_excerpt_length');
+add_filter('excerpt_length', 'my_excerpt_length', 999);
 add_filter('body_class', 'alter_body_classes');
 add_action('init', 'on_init');
