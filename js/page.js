@@ -5,7 +5,7 @@ jQuery(document).ready(function() {
         bufferDist: 50,
         velocityConst: 1.8,
         deadZoneWidth: 150,
-        changeCursor: true
+        changeCursor: false
     };
 
     jQuery('.youtube-video-link').click(function(e) {

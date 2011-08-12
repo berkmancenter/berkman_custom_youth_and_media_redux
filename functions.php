@@ -167,7 +167,7 @@ function create_flickr_gallery($attributes) {
 	$count = 0;
 
 	foreach ($photos as $photo) {
-		$html .= '<li class="'.$li_class.'"><img class="'.$image_class.'" alt="' . $photo['title'] . '" src="http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_'.$size.'.jpg" /></li>';
+		$html .= '<li class="'.$li_class.'"><a href="http://www.flickr.com/photos/'.$flickr_nsid.'/'.$photo['id'].'" target="_blank"><img class="'.$image_class.'" alt="' . $photo['title'] . '" src="http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_'.$size.'.jpg" /></a></li>';
 		if ($rows > 1 && $count == floor(count($photos) / $rows)) {
 			$html .= '</ul><ul '.$ul_class.'>';
 		}
