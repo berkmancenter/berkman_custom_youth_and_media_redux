@@ -63,10 +63,11 @@
 	 * generally use this hook to add elements to <head> such
 	 * as styles, scripts, and meta tags.
 	 */
-	wp_register_script('page', get_stylesheet_directory_uri() . '/js/page.js', array('jquery'));
-	wp_enqueue_script('page');
 	wp_head();
 ?>
+    <script type="text/javascript">
+       var disqus_developer = 1; // this would set it to developer mode
+    </script>
 </head>
 
 <body <?php body_class(); ?>>
@@ -122,6 +123,5 @@
 				<?php get_search_form(); ?>
 			</nav><!-- #access -->
 	</header><!-- #branding -->
-
 
 	<div id="main">

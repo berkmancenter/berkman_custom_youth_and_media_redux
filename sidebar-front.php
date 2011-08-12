@@ -10,9 +10,7 @@
 $options = twentyeleven_get_theme_options();
 $current_layout = $options['theme_layout'];
 
-if ( 'content' != $current_layout ) :
 ?>
-		<div id="secondary" class="widget-area" role="complementary">
-			<?php dynamic_sidebar( 'sidebar-6' ) ?>
-		</div><!-- #secondary .widget-area -->
-<?php endif; ?>
+<div id="secondary" class="widget-area" role="complementary">
+    <?php dynamic_sidebar( 'sidebar-6' ) ?>
+</div><!-- #secondary .widget-area -->

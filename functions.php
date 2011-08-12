@@ -192,6 +192,8 @@ function alter_body_classes( $classes ) {
 	if ( is_singular() && ! is_home() && ! is_front_page() && ! is_page_template( 'showcase.php' ) && ! is_page_template( 'sidebar-page.php' ) && ! is_page() && ! is_single())
 		$classes[] = 'singular';
 
+    if ( ( is_page_template( 'front.php' ) || is_page_template( 'sidebar-page.php' ) ) && array_search('one-column', $classes) !== false )
+        array_splice($classes, array_search('one-column', $classes), 1, 'right-sidebar');
 	return $classes;
 }
 function my_excerpt_length($length) {
@@ -204,5 +206,5 @@ add_shortcode( 'video-gallery', 'create_video_gallery' );
 add_shortcode( 'youtube-video', 'create_youtube_video' );
 add_filter('widget_text', 'do_shortcode');
 add_filter('excerpt_length', 'my_excerpt_length', 999);
-add_filter('body_class', 'alter_body_classes');
+add_filter('body_class', 'alter_body_classes', 999);
 add_action('init', 'on_init');

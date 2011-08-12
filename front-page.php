@@ -10,7 +10,6 @@
  *
  * @package WordPress
  * @subpackage Twenty_Eleven
- * Template Name: Isotope Page
  */
 
 wp_register_script('isotope', get_stylesheet_directory_uri() . '/js/jquery.isotope.min.js', array('jquery') );

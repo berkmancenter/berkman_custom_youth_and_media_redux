@@ -18,7 +18,7 @@ if (!empty($post_contains)) {
 		<?php if ( ! empty( $post_formats ) ): ?>
 		<span class="post-contains-icons">
 			<?php foreach ( $post_formats as $format ): ?>
-			<img src="<?php echo get_stylesheet_directory_uri() . '/images/' . $format . '.png'; ?>" alt="Post contains <?php echo $format; ?>" />
+			<img src="<?php echo get_stylesheet_directory_uri() . '/images/formats/' . $format . '.png'; ?>" alt="Post contains <?php echo $format; ?>" />
 			<?php endforeach; ?> 
 		</span>
 		<?php endif; ?>
