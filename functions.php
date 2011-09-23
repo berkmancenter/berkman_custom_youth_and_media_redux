@@ -67,10 +67,16 @@ function on_init() {
 		'after_title' => '</h3>',
 	) );
 
+    add_image_size('featured', 420, 420, true);
+    add_image_size('vertical', 200, 420, true);
+    add_image_size('horizontal', 420, 200, true);
+    add_image_size('small', 200, 200, true);
+
 	populate_flickr_taxonomy(FLICKR_NSID);
 	populate_block_size_taxonomy();
 	populate_post_formats_taxonomy();
 	populate_post_contains_taxonomy();
+    add_filter( 'the_content', 'add_page_children', 9 );
 	remove_filter( 'body_class', 'twentyeleven_body_classes' );
 	remove_filter( 'the_excerpt', 'sociable_display_hook' );
 }
@@ -196,12 +202,22 @@ function alter_body_classes( $classes ) {
         array_splice($classes, array_search('one-column', $classes), 1, 'right-sidebar');
 	return $classes;
 }
+
 function my_excerpt_length($length) {
     return 10;
 }
 
+function add_page_children($content = '') {
+    if (is_page()) {
+        $children = wp_list_pages(array('title_li' => '', 'child_of' => get_the_ID(), 'echo' => 0, 'sort_column' => 'menu_order'));
+        if ($children) {
+            return $content .= $children;
+        }
+    }
+}
+
 add_shortcode( 'google-calendar', 'create_calendar_iframe' );
-add_shortcode( 'flickr-gallery', 'create_flickr_gallery' );
+//add_shortcode( 'flickr-gallery', 'create_flickr_gallery' );
 add_shortcode( 'video-gallery', 'create_video_gallery' );
 add_shortcode( 'youtube-video', 'create_youtube_video' );
 add_filter('widget_text', 'do_shortcode');

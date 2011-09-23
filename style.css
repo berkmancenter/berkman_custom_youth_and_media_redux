@@ -179,10 +179,10 @@ h2 {
 	overflow: hidden;
 }
 .flickr-gallery {
-	width: 260px;
+	width: 264px;
 	overflow: hidden;
 	line-height: 1em;
-	white-space: nowrap;
+    margin: 1em auto;
 }
 .flickr-image {
 	width: 80px;
