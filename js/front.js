@@ -34,4 +34,21 @@ jQuery(document).ready(function() {
 		easing: 'linear',
 		animation: 20000 
 	});*/
+
+    jQuery('<div />', {id: 'hidden-resizer'}).hide().appendTo(document.body);
+    var resizer = jQuery("#hidden-resizer");
+    jQuery('.block').each(function() {
+        var size,
+            upperLimit = 20,
+            lowerLimit = 10,
+            desired_width = jQuery(this).width() - 20;
+
+        resizer.html(jQuery(this).find('.post-title').html());
+
+        for (i = upperLimit; resizer.width() > desired_width && i >= lowerLimit; i-=0.1 ) {
+            resizer.css("font-size", i + 'px');
+        }
+
+        jQuery(this).find('.post-title').css("font-size", resizer.css('font-size'));
+    });
 });
