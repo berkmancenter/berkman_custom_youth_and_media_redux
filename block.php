@@ -13,7 +13,7 @@ if (!empty($post_contains)) {
 <?php $block_size = reset($block_sizes)->slug; ?>
 <?php $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $block_size ); ?>
 <a class="block-link" href="<?php echo get_permalink( $post->ID ); ?>">
-<div class="<?php echo strtolower($block_size) . ' ' . strtolower(implode(' ', $post_contains)); ?> block" style="background-image: url('<?php echo $image[0]; ?>')">
+<div class="<?php echo strtolower($block_size); if (!empty($post_contains)) { echo ' ' . strtolower(implode(' ', $post_contains)); } ?> block" style="background-image: url('<?php echo $image[0]; ?>')">
 	<div class="post-info">
 		<?php if ( ! empty( $post_formats ) ): ?>
 		<span class="post-contains-icons">
