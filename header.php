@@ -84,7 +84,7 @@
                             <img src="<?php echo get_stylesheet_directory_uri() . '/images/berkman-logo.png'; ?>" alt="Berkman Center for Internet &amp; Society" />
                         </a>
                         <a href="http://www.fir.unisg.ch/" title="University of St. Gallen">
-                            <img src="<?php echo get_stylesheet_directory_uri() . '/images/fir-logo.gif'; ?>" alt="University of St. Gallen" />
+                            <img src="<?php echo get_stylesheet_directory_uri() . '/images/fir-logo.png'; ?>" alt="University of St. Gallen" />
                         </a>
                         </span>
                     </span>
