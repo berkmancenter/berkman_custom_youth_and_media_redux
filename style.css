@@ -110,6 +110,9 @@ h2 {
 .widget-title {
 	font-size: 120%;
 }
+.textwidget {
+    text-align: center;
+}
 .rsswidget img {
 	display: none;
 }
