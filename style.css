@@ -21,6 +21,7 @@ h2 {
 	max-width: none;
 	margin-top: 0;
 	padding: 0 4%;
+    margin-bottom: 0;
 }
 .home #primary, .home #secondary {
     padding-top: 1.625em;
@@ -30,6 +31,7 @@ h2 {
 }
 #branding {
 	border: 0;
+    white-space: nowrap;
 }
 #branding img {
 	width: auto;
@@ -63,8 +65,10 @@ h2 {
     margin-right: 0;
 }
 #institutions {
-    float: right;
     padding-top: 17px;
+    position: absolute;
+    right: 0;
+    z-index: -1;
 }
 #content {
 	margin-left: 0;
