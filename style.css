@@ -278,3 +278,6 @@ h2 {
 #mycarousel img {
     height: 200px;
 }
+#site-generator a {
+    display: none;
+}
