@@ -1,5 +1,5 @@
 <?php 
-define('FLICKR_NSID', '33198938@N00');
+define('FLICKR_NSID', '65827107@N08');
 define('FLICKR_API_KEY', '5687af375108fc3d342075b21af266e7');
 
 function on_init() {
