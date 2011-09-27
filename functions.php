@@ -211,9 +211,10 @@ function add_page_children($content = '') {
     if (is_page()) {
         $children = wp_list_pages(array('title_li' => '', 'child_of' => get_the_ID(), 'echo' => 0, 'sort_column' => 'menu_order'));
         if ($children) {
-            return $content .= $children;
+            $content .= $children;
         }
     }
+    return $content;
 }
 
 add_shortcode( 'google-calendar', 'create_calendar_iframe' );
