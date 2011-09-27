@@ -178,23 +178,6 @@ h2 {
 .view-cap, .view-container-border {
 	background-color: black !important;
 }
-#flickr {
-	overflow: hidden;
-}
-.flickr-gallery {
-	width: 264px;
-	overflow: hidden;
-	line-height: 1em;
-    margin: 1em auto;
-}
-.flickr-image {
-	width: 80px;
-	margin: 4px;
-	position: relative;
-}
-.flickr-li {
-	display: inline-block;
-}
 .social-links img {
 	margin: 5px;
 }
@@ -270,8 +253,8 @@ h2 {
     background-color: #000;
 }
 .youtube-video {
-    text-align: right;
-    margin-bottom: 5px;
+    max-width: 350px;
+    margin: 0 auto 5px;
 }
 
 #mycarousel {
