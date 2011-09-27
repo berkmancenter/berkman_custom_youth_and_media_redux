@@ -7,7 +7,8 @@ $flickr_attr = array(
     'li_class' => '',
     'image_class' => '',
     'size' => 'm',
-    'rows' => 1
+    'rows' => 1,
+    'results' => 50
 );
 if ( ! empty( $flickr_tags ) ): 
     $tags = array();
