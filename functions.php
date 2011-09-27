@@ -72,13 +72,16 @@ function on_init() {
     add_image_size('horizontal', 420, 200, true);
     add_image_size('small', 200, 200, true);
 
+    add_filter( 'the_content', 'add_page_children', 9 );
+	remove_filter( 'body_class', 'twentyeleven_body_classes' );
+	remove_filter( 'the_excerpt', 'sociable_display_hook' );
+}
+
+function on_admin_init() {
 	populate_flickr_taxonomy(FLICKR_NSID);
 	populate_block_size_taxonomy();
 	populate_post_formats_taxonomy();
 	populate_post_contains_taxonomy();
-    add_filter( 'the_content', 'add_page_children', 9 );
-	remove_filter( 'body_class', 'twentyeleven_body_classes' );
-	remove_filter( 'the_excerpt', 'sociable_display_hook' );
 }
 
 
@@ -225,3 +228,4 @@ add_filter('widget_text', 'do_shortcode');
 add_filter('excerpt_length', 'my_excerpt_length', 999);
 add_filter('body_class', 'alter_body_classes', 999);
 add_action('init', 'on_init');
+add_action('admin_init', 'on_admin_init');
