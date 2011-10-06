@@ -287,3 +287,6 @@ img#logo {
 #site-generator a {
     display: none;
 }
+#site-generator { 
+    background: transparent;
+}
