@@ -11,7 +11,7 @@ jQuery(document).ready(function() {
 			}
 		},
 		sortBy: 'index',
-		sortAscending: false,
+		sortAscending: false
 	});
 	jQuery('.block').hover(
 		function() { jQuery(this).find('.post-excerpt').slideDown('fast'); },
@@ -27,13 +27,6 @@ jQuery(document).ready(function() {
 		jQuery('#filters :checkbox').removeAttr('checked');
 		jQuery('#content').isotope({ filter: '*' });
 	});
-	/*jQuery('.flickr-gallery').jcarousel({
-		auto: 0.001,
-		itemFallbackDimension: 75,
-		wrap: 'circular',
-		easing: 'linear',
-		animation: 20000 
-	});*/
 
     jQuery('<div />', {id: 'hidden-resizer'}).hide().appendTo(document.body);
     var resizer = jQuery("#hidden-resizer");
