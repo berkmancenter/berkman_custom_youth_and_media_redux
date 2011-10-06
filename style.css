@@ -131,8 +131,14 @@ img#logo {
 	padding: 0;
 	margin: 10px;
 }
-.block-link:hover {
+.block-link span {
 	text-decoration: none;
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left: 0;
+    z-index: 1;
 }
 .featured {
 	height: 420px;
