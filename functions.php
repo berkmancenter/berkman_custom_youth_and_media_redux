@@ -188,8 +188,18 @@ function create_flickr_gallery($attributes) {
 function create_youtube_video( $attributes ) {
 	extract( shortcode_atts( array(
 		'id' => '79IYZVYIVLA',
+        'desc' => ''
 	), $attributes ) );
-    $html = '<div class="youtube-video"><a class="youtube-video-link" href="http://youtu.be/'.$id.'" target="_blank"><img src="http://i.ytimg.com/vi/'.$id.'/hqdefault.jpg" /></a></div>';
+    $html = '
+        <div class="youtube-video">
+        <a class="youtube-video-link" href="http://youtu.be/'.$id.'" target="_blank">
+        <img src="http://i.ytimg.com/vi/'.$id.'/hqdefault.jpg" />
+        </a>';
+    if (!empty($attributes['desc'])) {
+        $html .= '<div class="youtube-desc">' . wp_kses($attributes['desc']) . '</div>';
+    }
+    $html .= '</div>';
+    $html .= '<script>jQuery(function() { jQuery(".youtube-video").hover(function() { jQuery(this).find(".youtube-desc").slideDown(); }, function() { jQuery(this).find(".youtube-desc").slideUp(); }); jQuery(".youtube-desc").hide(); }); </script>';
     return $html;
 }
 

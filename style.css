@@ -152,7 +152,7 @@ img#logo {
 	height: 200px;
 	width: 200px;
 }
-.post-info {
+.post-info, .youtube-desc {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
@@ -163,6 +163,9 @@ img#logo {
 	max-height: 180px;
 	overflow: hidden;
 	white-space: nowrap;
+}
+.youtube-desc {
+    font-size: 1.3em;
 }
 .post-title, .post-excerpt, .post-contains-icons {
 	margin: 0 10px;
@@ -262,8 +265,8 @@ img#logo {
 .youtube-video {
     max-width: 350px;
     margin: 0 auto 5px;
+    position: relative;
 }
-
 #mycarousel {
     list-style: none;
     margin: 0;
