@@ -13,17 +13,17 @@ if (!empty($post_contains)) {
 <?php $block_size = reset($block_sizes)->slug; ?>
 <?php $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $block_size ); ?>
 <a class="block-link" href="<?php echo get_permalink( $post->ID ); ?>">
-<div class="<?php echo strtolower($block_size); if (!empty($post_contains)) { echo ' ' . strtolower(implode(' ', $post_contains)); } ?> block" style="background-image: url('<?php echo $image[0]; ?>')">
+<div class="<?php echo esc_attr(strtolower($block_size)); if (!empty($post_contains)) { echo ' ' . esc_attr(strtolower(implode(' ', $post_contains))); } ?> block" style="background-image: url('<?php echo esc_url($image[0]); ?>')">
 	<div class="post-info">
 		<?php if ( ! empty( $post_formats ) ): ?>
 		<span class="post-contains-icons">
 			<?php foreach ( $post_formats as $format ): ?>
-			<img src="<?php echo get_stylesheet_directory_uri() . '/images/formats/' . $format . '.png'; ?>" alt="Post contains <?php echo $format; ?>" />
-			<?php endforeach; ?> 
+			<img src="<?php echo get_stylesheet_directory_uri() . '/images/formats/' . urlencode($format) . '.png'; ?>" alt="Post contains <?php echo esc_attr($format); ?>" />
+			<?php endforeach; ?>
 		</span>
 		<?php endif; ?>
 		<span class="post-title"><?php the_title(); ?></span>
-		<div class="post-excerpt"><?php echo strip_tags(get_the_excerpt()); ?></div>
+		<div class="post-excerpt"><?php echo esc_html(get_the_excerpt()); ?></div>
 	</div>
 </div>
 </a>

@@ -86,7 +86,7 @@ function on_admin_init() {
 
 
 function populate_flickr_taxonomy($flickr_nsid) {
-	$url = 'http://api.flickr.com/services/rest/?method=flickr.tags.getListUser&api_key='.FLICKR_API_KEY.'&user_id='.$flickr_nsid.'&format=php_serial&nojsoncallback=1';
+	$url = 'http://api.flickr.com/services/rest/?method=flickr.tags.getListUser&api_key='.FLICKR_API_KEY.'&user_id='.urlencode($flickr_nsid).'&format=php_serial&nojsoncallback=1';
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$output = unserialize(curl_exec($ch));
@@ -134,7 +134,7 @@ function create_calendar_iframe($attributes) {
 		$src = 'src='.urlencode($src).'&amp;';
 	}
 
-    $src = '<iframe class="google-calendar" src="'.get_stylesheet_directory_uri().'/restylegc/restylegc.php?showTitle=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height='.$height.'&amp;wkst=1&amp;mode='.strtoupper($mode).'&amp;bgcolor=%23'.$bgcolor.'&amp;'.$src.'color=%23'.$color.'&amp;ctz=America%2FNew_York" style=" border-width:0; max-width: 100%; " height="'.$height.'" frameborder="0" scrolling="no"></iframe>';
+    $src = '<iframe class="google-calendar" src="'.get_stylesheet_directory_uri().'/restylegc/restylegc.php?showTitle=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height='.urlencode($height).'&amp;wkst=1&amp;mode='.urlencode(strtoupper($mode)).'&amp;bgcolor=%23'.urlencode($bgcolor).'&amp;'.$src.'color=%23'.urlencode($color).'&amp;ctz=America%2FNew_York" style=" border-width:0; max-width: 100%; " height="'.esc_attr($height).'" frameborder="0" scrolling="no"></iframe>';
 
 	return $src;
 }
@@ -154,21 +154,21 @@ function create_flickr_gallery($attributes) {
 	), $attributes ) );
 
 	if ($id) {
-		$id = 'id="'.$id.'"';
+		$id = 'id="'.esc_attr($id).'"';
 	}
 	if ($ul_id) {
-		$ul_id = 'id="'.$ul_id.'"';
+		$ul_id = 'id="'.esc_attr($ul_id).'"';
 	}
 	if (!empty($tags)) {
-		$tags = 'tags='.$tags.'&';
+		$tags = 'tags='.urlencode($tags).'&';
 	}
 	if (!empty($ul_class)) {
-		$ul_class = 'class="'.$ul_class.'"';
+		$ul_class = 'class="'.esc_attr($ul_class).'"';
 	}
 	wp_register_script('slideshow', get_stylesheet_directory_uri() . '/js/slideshow.js', array('jquery'));
 	wp_enqueue_script('slideshow');
 	$html = '<div '.$id.'><ul '.$ul_id.' '.$ul_class.'>';
-	$url = 'http://api.flickr.com/services/rest/?method=flickr.photos.search&per_page='.$results.'&api_key='.FLICKR_API_KEY.'&user_id='.$flickr_nsid.'&'.$tags.'format=php_serial&nojsoncallback=1';
+	$url = 'http://api.flickr.com/services/rest/?method=flickr.photos.search&per_page='.urlencode($results).'&api_key='.urlencode(FLICKR_API_KEY).'&user_id='.urlencode($flickr_nsid).'&'.$tags.'format=php_serial&nojsoncallback=1';
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$output = unserialize(curl_exec($ch));
@@ -176,7 +176,7 @@ function create_flickr_gallery($attributes) {
 	$count = 0;
 
 	foreach ($photos as $photo) {
-		$html .= '<li class="'.$li_class.'"><a href="http://www.flickr.com/photos/'.$flickr_nsid.'/'.$photo['id'].'" target="_blank"><img class="'.$image_class.'" alt="' . $photo['title'] . '" src="http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_'.$size.'.jpg" /></a></li>';
+		$html .= '<li class="'.esc_attr($li_class).'"><a href="http://www.flickr.com/photos/'.urlencode($flickr_nsid).'/'.urlencode($photo['id']).'" target="_blank"><img class="'.esc_attr($image_class).'" alt="' . esc_attr($photo['title']) . '" src="http://farm' . urlencode($photo['farm']) . '.static.flickr.com/' . urlencode($photo['server']) . '/' . urlencode($photo['id']) . '_' . urlencode($photo['secret']) . '_'.urlencode($size).'.jpg" /></a></li>';
 		if ($rows > 1 && $count == floor(count($photos) / $rows)) {
 			$html .= '</ul><ul '.$ul_class.'>';
 		}
@@ -192,11 +192,11 @@ function create_youtube_video( $attributes ) {
 	), $attributes ) );
     $html = '
         <div class="youtube-video">
-        <a class="youtube-video-link" href="http://youtu.be/'.$id.'" target="_blank">
-        <img src="http://i.ytimg.com/vi/'.$id.'/hqdefault.jpg" />
+        <a class="youtube-video-link" href="http://youtu.be/'.urlencode($id).'" target="_blank">
+        <img src="http://i.ytimg.com/vi/'.urlencode($id).'/hqdefault.jpg" />
         </a>';
     if (!empty($attributes['desc'])) {
-        $html .= '<div class="youtube-desc">' . wp_kses($attributes['desc']) . '</div>';
+        $html .= '<div class="youtube-desc">' . esc_attr($attributes['desc']) . '</div>';
     }
     $html .= '</div>';
     $html .= '<script>jQuery(function() { jQuery(".youtube-video").hover(function() { jQuery(this).find(".youtube-desc").slideDown(); }, function() { jQuery(this).find(".youtube-desc").slideUp(); }); jQuery(".youtube-desc").hide(); }); </script>';

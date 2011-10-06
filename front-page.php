@@ -36,10 +36,10 @@ get_header(); ?>
 				<h2>Explore some of Youth and Media's highlights. Only show:</h2>
 				<div id="filters">
                     <?php foreach ($filters as $filter): ?>
-                    <label for="<?php echo strtolower($filter); ?>">
-                        <?php echo strtoupper($filter); ?>
+                    <label for="<?php echo esc_attr(strtolower($filter)); ?>">
+                        <?php echo esc_html(strtoupper($filter)); ?>
                     </label>
-                        <input type="checkbox" id="<?php echo strtolower($filter); ?>" value=".<?php echo strtolower($filter); ?>" />
+                        <input type="checkbox" id="<?php echo esc_attr(strtolower($filter)); ?>" value=".<?php echo esc_attr(strtolower($filter)); ?>" />
                     <?php endforeach; ?>
 					<button id="showall">show all</button>
 				</div>

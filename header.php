@@ -65,9 +65,6 @@
 	 */
 	wp_head();
 ?>
-    <script type="text/javascript">
-       var disqus_developer = 1; // this would set it to developer mode
-    </script>
 </head>
 
 <body <?php body_class(); ?>>
