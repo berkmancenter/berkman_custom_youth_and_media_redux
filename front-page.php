@@ -33,7 +33,7 @@ get_header(); ?>
 
 		<div id="primary">
                 <?php if ( ! empty( $filters ) ): ?>
-				<h2>Explore some of Youth and Media's highlights. Sort by:</h2>
+				<h2>Explore some of Youth and Media's highlights. Only show:</h2>
 				<div id="filters">
                     <?php foreach ($filters as $filter): ?>
                     <label for="<?php echo strtolower($filter); ?>">
