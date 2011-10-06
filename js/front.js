@@ -13,10 +13,10 @@ jQuery(document).ready(function() {
 		sortBy: 'index',
 		sortAscending: false,
 	});
-	jQuery('.block').bind({
-		'mouseleave': function(e) { jQuery(e.target).find('.post-excerpt').slideUp('fast'); },
-		'mouseenter': function(e) { jQuery(e.target).find('.post-excerpt').slideDown('fast'); }
-	});
+	jQuery('.block').hover(
+		function() { jQuery(this).find('.post-excerpt').slideDown('fast'); },
+		function() { jQuery(this).find('.post-excerpt').slideUp('fast'); }
+	);
 	jQuery('#filters :checkbox').click(function(){
 		jQuery('label[for="' + jQuery(this).attr('id') + '"]').toggleClass('filter-active');
 		var isotopeSelector = jQuery.map(jQuery('#filters :checked'), function(elem) { return jQuery(elem).val(); }).toString().replace(/,/g, '');
