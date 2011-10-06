@@ -77,7 +77,7 @@
                 <h1 id="site-title">
                     <span>
                         <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-                            <img src="<?php echo get_stylesheet_directory_uri() . '/images/youthandmedia-logo.png'; ?>" alt="<?php bloginfo( 'name' ); ?>" />
+                            <img id="logo" src="<?php echo get_stylesheet_directory_uri() . '/images/youthandmedia-logo.png'; ?>" alt="<?php bloginfo( 'name' ); ?>" />
                         </a>
                         <span id="institutions">
                         <a href="http://cyber.law.harvard.edu/" title="Berkman Center for Internet &amp; Society">
