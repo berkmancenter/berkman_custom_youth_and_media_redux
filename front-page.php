@@ -67,12 +67,12 @@ get_header(); ?>
 		</div><!-- #primary -->
 <!--[if lt IE 9]>
 <script>
-function filterblocks(id) {
-    jquery('label[for="' + id + '"]').toggleclass('filter-active');
-    var isotopeselector = jquery.map(jquery('#filters :checked'), function(elem) { return jquery(elem).val(); }).tostring().replace(/,/g, '');
-    jquery('#content').isotope({ filter: isotopeselector });
-}
 jQuery(function() {
+    function filterblocks(id) {
+        jquery('label[for="' + id + '"]').toggleclass('filter-active');
+        var isotopeselector = jquery.map(jquery('#filters :checked'), function(elem) { return jquery(elem).val(); }).tostring().replace(/,/g, '');
+        jquery('#content').isotope({ filter: isotopeselector });
+    }
     jQuery('#filters label').click(function(e){
         jQuery('#' + jQuery(this).attr('for')).attr('checked',  jQuery('#' + jQuery(this).attr('for')).attr('checked') != 'checked');
         filterBlocks(jQuery(this).attr('for'));
