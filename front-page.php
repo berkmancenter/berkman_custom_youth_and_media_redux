@@ -65,6 +65,13 @@ get_header(); ?>
 
 			</div><!-- #content -->
 		</div><!-- #primary -->
-
+<!--[if lt IE 9]>
+jQuery(function() {
+    jQuery('#filters label').click(function(e){
+        jQuery('#' + jQuery(this).attr('for')).attr('checked',  jQuery('#' + jQuery(this).attr('for')).attr('checked') != 'checked');
+        filterBlocks(jQuery(this).attr('for'));
+    });
+});
+<![endif]-->
 <?php get_sidebar('front'); ?>
 <?php get_footer(); ?>

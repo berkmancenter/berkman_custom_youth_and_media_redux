@@ -1,39 +1,35 @@
 jQuery(document).ready(function() {
-	jQuery('#content').isotope({
-		itemSelector: '.block',
-		layoutMode: 'masonry',
-		masonry: {
-			columnWidth: 10
-		},
-		getSortData: {
-			index: function(elem) {
-				return elem.height() + elem.width();
-			}
-		},
-		sortBy: 'index',
-		sortAscending: false
-	});
-	jQuery('.block').hover(
-		function() { jQuery(this).find('.post-excerpt').slideDown('fast'); },
-		function() { jQuery(this).find('.post-excerpt').slideUp('fast'); }
-	);
+    jQuery('#content').isotope({
+        itemSelector: '.block',
+        layoutMode: 'masonry',
+        masonry: {
+            columnWidth: 10
+        },
+        getSortData: {
+            index: function(elem) {
+                return elem.height() + elem.width();
+            }
+        },
+        sortBy: 'index',
+        sortAscending: false
+    });
+    jQuery('.block').hover(
+        function() { jQuery(this).find('.post-excerpt').slideDown('fast'); },
+        function() { jQuery(this).find('.post-excerpt').slideUp('fast'); }
+    );
     function filterBlocks(id) {
-		jQuery('label[for="' + id + '"]').toggleClass('filter-active');
-		var isotopeSelector = jQuery.map(jQuery('#filters :checked'), function(elem) { return jQuery(elem).val(); }).toString().replace(/,/g, '');
-		jQuery('#content').isotope({ filter: isotopeSelector });
+        jQuery('label[for="' + id + '"]').toggleClass('filter-active');
+        var isotopeSelector = jQuery.map(jQuery('#filters :checked'), function(elem) { return jQuery(elem).val(); }).toString().replace(/,/g, '');
+        jQuery('#content').isotope({ filter: isotopeSelector });
     }
-	jQuery('#filters input[type="checkbox"]').change(function(){
-		filterBlocks(jQuery(this).attr('id'));
-	});
-	jQuery('#filters label').click(function(){
-        jQuery('#' + jQuery(this).attr('for')).attr('checked',  jQuery('#' + jQuery(this).attr('for')).attr('checked') != 'checked');
-		filterBlocks(jQuery(this).attr('for'));
-	});
-	jQuery('#showall').click(function() {
-		jQuery('#filters label').removeClass('filter-active');
-		jQuery('#filters :checkbox').removeAttr('checked');
-		jQuery('#content').isotope({ filter: '*' });
-	});
+    jQuery('#filters input[type="checkbox"]').change(function(e){
+        filterBlocks(jQuery(this).attr('id'));
+    });
+    jQuery('#showall').click(function() {
+        jQuery('#filters label').removeClass('filter-active');
+        jQuery('#filters :checkbox').removeAttr('checked');
+        jQuery('#content').isotope({ filter: '*' });
+    });
 
     jQuery('<div />', {id: 'hidden-resizer'}).hide().appendTo(document.body);
     var resizer = jQuery("#hidden-resizer");
