@@ -17,7 +17,7 @@ jQuery(document).ready(function() {
 		function() { jQuery(this).find('.post-excerpt').slideDown('fast'); },
 		function() { jQuery(this).find('.post-excerpt').slideUp('fast'); }
 	);
-	jQuery('#filters :checkbox').change(function(){
+	jQuery('#filters :checkbox, #filters label').click(function(){
 		jQuery('label[for="' + jQuery(this).attr('id') + '"]').toggleClass('filter-active');
 		var isotopeSelector = jQuery.map(jQuery('#filters :checked'), function(elem) { return jQuery(elem).val(); }).toString().replace(/,/g, '');
 		jQuery('#content').isotope({ filter: isotopeSelector });
