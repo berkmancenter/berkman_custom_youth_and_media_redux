@@ -26,6 +26,7 @@ jQuery(document).ready(function() {
 		filterBlocks(jQuery(this).attr('id'));
 	});
 	jQuery('#filters label').click(function(){
+        jQuery('#' + jQuery(this).attr('for')).attr('checked',  jQuery('#' + jQuery(this).attr('for')).attr('checked') != 'checked');
 		filterBlocks(jQuery(this).attr('for'));
 	});
 	jQuery('#showall').click(function() {
