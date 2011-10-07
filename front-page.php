@@ -69,9 +69,9 @@ get_header(); ?>
 <script>
 jQuery(function() {
     function filterBlocks(id) {
-        jquery('label[for="' + id + '"]').toggleclass('filter-active');
-        var isotopeselector = jquery.map(jquery('#filters :checked'), function(elem) { return jquery(elem).val(); }).tostring().replace(/,/g, '');
-        jquery('#content').isotope({ filter: isotopeselector });
+        jQuery('label[for="' + id + '"]').toggleClass('filter-active');
+        var isotopeSelector = jQuery.map(jQuery('#filters :checked'), function(elem) { return jQuery(elem).val(); }).toString().replace(/,/g, '');
+        jQuery('#content').isotope({ filter: isotopeSelector });
     }
     jQuery('#filters label').click(function(e){
         jQuery('#' + jQuery(this).attr('for')).attr('checked',  jQuery('#' + jQuery(this).attr('for')).attr('checked') != 'checked');
