@@ -68,7 +68,7 @@ get_header(); ?>
 <!--[if lt IE 9]>
 <script>
 jQuery(function() {
-    function filterblocks(id) {
+    function filterBlocks(id) {
         jquery('label[for="' + id + '"]').toggleclass('filter-active');
         var isotopeselector = jquery.map(jquery('#filters :checked'), function(elem) { return jquery(elem).val(); }).tostring().replace(/,/g, '');
         jquery('#content').isotope({ filter: isotopeselector });
