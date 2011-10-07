@@ -73,7 +73,7 @@ jQuery(function() {
         filterBlocks(jQuery(this).attr('for'));
     });
 });
-<script>
+</script>
 <![endif]-->
 <?php get_sidebar('front'); ?>
 <?php get_footer(); ?>
