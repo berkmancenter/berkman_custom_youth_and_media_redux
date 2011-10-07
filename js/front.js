@@ -17,10 +17,10 @@ jQuery(document).ready(function() {
         function() { jQuery(this).find('.post-excerpt').slideDown('fast'); },
         function() { jQuery(this).find('.post-excerpt').slideUp('fast'); }
     );
-    function filterBlocks(id) {
-        jQuery('label[for="' + id + '"]').toggleClass('filter-active');
-        var isotopeSelector = jQuery.map(jQuery('#filters :checked'), function(elem) { return jQuery(elem).val(); }).toString().replace(/,/g, '');
-        jQuery('#content').isotope({ filter: isotopeSelector });
+    function filterblocks(id) {
+        jquery('label[for="' + id + '"]').toggleclass('filter-active');
+        var isotopeselector = jquery.map(jquery('#filters :checked'), function(elem) { return jquery(elem).val(); }).tostring().replace(/,/g, '');
+        jquery('#content').isotope({ filter: isotopeselector });
     }
     jQuery('#filters input[type="checkbox"]').change(function(e){
         filterBlocks(jQuery(this).attr('id'));
