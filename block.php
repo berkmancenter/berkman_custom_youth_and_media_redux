@@ -2,11 +2,12 @@
 $block_sizes = get_the_terms($post->ID, 'block_sizes');
 $post_formats = get_the_terms( $post->ID, 'post_formats' );
 $post_contains = get_the_terms( $post->ID, 'post_contains' );
+function get_term_name($term) { return $term->name; }
 if (!empty($post_formats)) {
-	$post_formats = array_map(function($term) { return $term->name; }, $post_formats );
+	$post_formats = array_map('get_term_name', $post_formats );
 }
 if (!empty($post_contains)) {
-	$post_contains = array_map(function($term) { return $term->name; }, $post_contains );
+	$post_contains = array_map('get_term_name', $post_contains );
 }
 ?>
 <?php if (has_post_thumbnail( $post->ID ) && $block_sizes): ?>
