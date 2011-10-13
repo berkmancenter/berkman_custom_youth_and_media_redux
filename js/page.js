@@ -19,4 +19,6 @@ jQuery(document).ready(function() {
         container: '#viz1',
         deadZoneWidth: '20%'
     });
+
+    jQuery('table.tablesorter').tablesorter();
 });

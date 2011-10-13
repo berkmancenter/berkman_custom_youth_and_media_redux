@@ -7,9 +7,11 @@
  * @since Twenty Eleven 1.0
  */
 wp_register_script('simplemodal', get_stylesheet_directory_uri() . '/js/jquery.simplemodal-1.4.1.js', array('jquery'));
+wp_register_script('tablesorter', get_stylesheet_directory_uri() . '/js/jquery.tablesorter.min.js', array('jquery'));
 wp_register_script('page', get_stylesheet_directory_uri() . '/js/page.js', array('jquery'));
 wp_register_script('scrubber', get_stylesheet_directory_uri() . '/js/jquery.scrubber.js', array('jquery'));
 wp_enqueue_script('simplemodal');
+wp_enqueue_script('tablesorter');
 wp_enqueue_script('page');
 wp_enqueue_script('scrubber');
 
