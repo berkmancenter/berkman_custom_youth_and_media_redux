@@ -39,7 +39,7 @@ get_header(); ?>
                     <label for="<?php echo esc_attr(strtolower($filter)); ?>">
                         <?php echo esc_html(strtoupper($filter)); ?>
                     </label>
-                        <input type="checkbox" id="<?php echo esc_attr(strtolower($filter)); ?>" value=".<?php echo esc_attr(strtolower($filter)); ?>" />
+                        <input type="checkbox" id="<?php echo esc_attr(strtolower($filter)); ?>" value=".<?php echo esc_attr(preg_replace('/[^_a-zA-Z0-9-]/', '', strtolower($filter))); ?>" />
                     <?php endforeach; ?>
 					<button id="showall">show all</button>
 				</div>

@@ -2,7 +2,7 @@
 $block_sizes = get_the_terms($post->ID, 'block_sizes');
 $post_formats = get_the_terms( $post->ID, 'post_formats' );
 $post_contains = get_the_terms( $post->ID, 'post_contains' );
-function get_term_name($term) { return $term->name; }
+function get_term_name($term) { return preg_replace('/[^_a-zA-Z0-9-]/', '', $term->name); }
 if (!empty($post_formats)) {
 	$post_formats = array_map('get_term_name', $post_formats );
 }
