@@ -2,6 +2,7 @@
 $block_sizes = get_the_terms($post->ID, 'block_sizes');
 $post_formats = get_the_terms( $post->ID, 'post_formats' );
 $post_contains = get_the_terms( $post->ID, 'post_contains' );
+$post_order = intval(get_post_meta( $post->ID, 'front_page_order', true ));
 function get_term_name($term) { return preg_replace('/[^_a-zA-Z0-9-]/', '', $term->name); }
 if (!empty($post_formats)) {
 	$post_formats = array_map('get_term_name', $post_formats );
@@ -13,7 +14,7 @@ if (!empty($post_contains)) {
 <?php if (has_post_thumbnail( $post->ID ) && $block_sizes): ?>
 <?php $block_size = reset($block_sizes)->slug; ?>
 <?php $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $block_size ); ?>
-<div class="<?php echo esc_attr(strtolower($block_size)); if (!empty($post_contains)) { echo ' ' . esc_attr(strtolower(implode(' ', $post_contains))); } ?> block" style="background-image: url('<?php echo esc_url($image[0]); ?>')">
+<div class="<?php echo esc_attr(strtolower($block_size)); if (!empty($post_contains)) { echo ' ' . esc_attr(strtolower(implode(' ', $post_contains))); } ?> block" tabindex="<?php echo $post_order; ?>" style="background-image: url('<?php echo esc_url($image[0]); ?>')">
     <a class="block-link" href="<?php the_permalink(); ?>"><span></span></a>
 	<div class="post-info">
 		<?php if ( ! empty( $post_formats ) ): ?>

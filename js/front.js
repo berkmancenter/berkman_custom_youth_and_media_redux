@@ -7,11 +7,17 @@ jQuery(document).ready(function() {
         },
         getSortData: {
             index: function(elem) {
-                return elem.height() + elem.width();
+                var returnValue = 0, customOrder = elem.attr('tabindex');
+                if (customOrder > 0) {
+                    returnValue = customOrder;
+                }
+                else {
+                    returnValue = -1 * (elem.height() + elem.width()) + 10000;
+                }
+                return returnValue;
             }
         },
-        sortBy: 'index',
-        sortAscending: false
+        sortBy: 'index'
     });
     jQuery('.block').hover(
         function() { jQuery(this).find('.post-excerpt').slideDown('fast'); },
