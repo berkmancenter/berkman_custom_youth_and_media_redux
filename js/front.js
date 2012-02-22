@@ -53,4 +53,7 @@ jQuery(document).ready(function() {
 
         jQuery(this).find('.post-title').css("font-size", resizer.css('font-size'));
     });
+
+    // Hack to fix email submissions from different domain
+    jQuery('.gform_wrapper form').attr('action', function(i, attr) { return document.location.host == 'youthandmedia.org' ? attr.replace('/youthandmediaalpha','') : attr });
 });
