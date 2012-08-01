@@ -37,17 +37,16 @@ jQuery(document).ready(function() {
         jQuery('#content').isotope({ filter: '*' });
     });
 
-    jQuery('<div />', {id: 'hidden-resizer'}).hide().appendTo(document.body);
-    var resizer = jQuery("#hidden-resizer");
     jQuery('.block').each(function() {
-        var size,
-            upperLimit = 20,
-            lowerLimit = 10,
+        var resizer = jQuery('<div />', {id: 'hidden-resizer'}).hide().appendTo(document.body),
+            size,
+            fontSizeUpperLimit = 20,
+            fontSizeLowerLimit = 10,
             desired_width = jQuery(this).width() - 20;
 
         resizer.html(jQuery(this).find('.post-title').html());
 
-        for (i = upperLimit; resizer.width() > desired_width && i >= lowerLimit; i-=0.1 ) {
+        for (i = fontSizeUpperLimit; resizer.width() > desired_width && i >= fontSizeLowerLimit; i-=0.1 ) {
             resizer.css("font-size", i + 'px');
         }
 

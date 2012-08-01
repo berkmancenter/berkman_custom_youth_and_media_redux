@@ -75,7 +75,7 @@ img#logo {
 }
 #content {
 	margin-left: 0;
-	width: 74%;
+	width: 72%;
 }
 #access {
 	background: transparent;
@@ -93,6 +93,9 @@ img#logo {
 	color: #777;
 	line-height: 2em;
 	font-size: 120%;
+}
+.menu > li > a {
+    white-space: nowrap;
 }
 #access .sub-menu a {
 	z-index: 999;
@@ -178,6 +181,9 @@ img#logo {
 }
 .post-title {
 	font-size: 120%;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .post-excerpt {
 	font-size: 85%;

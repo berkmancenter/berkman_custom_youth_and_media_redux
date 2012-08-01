@@ -222,7 +222,7 @@ function my_excerpt_length($length) {
 
 function add_page_children($content = '') {
     if (is_page()) {
-        $children = wp_list_pages(array('title_li' => '', 'child_of' => get_the_ID(), 'echo' => 0, 'sort_column' => 'menu_order'));
+        $children = wp_list_pages(array('title_li' => '', 'child_of' => get_the_ID(), 'echo' => 0, 'sort_column' => 'menu_order', 'sort_order' => 'DESC'));
         if ($children) {
             $content .= $children;
         }
