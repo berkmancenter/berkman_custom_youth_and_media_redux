@@ -24,6 +24,9 @@ jQuery(document).ready(function() {
         function() { jQuery(this).find('.post-excerpt').slideUp('fast'); }
     );
     function filterBlocks(id) {
+        jQuery('#filters label').removeClass('filter-active');
+        jQuery('#filters :checkbox').removeAttr('checked');
+        jQuery('#' + id).attr('checked', true);
         jQuery('label[for="' + id + '"]').toggleClass('filter-active');
         var isotopeSelector = jQuery.map(jQuery('#filters :checked'), function(elem) { return jQuery(elem).val(); }).toString().replace(/,/g, '');
         jQuery('#content').isotope({ filter: isotopeSelector });
