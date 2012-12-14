@@ -84,6 +84,23 @@ function on_admin_init() {
 	populate_post_contains_taxonomy();
 }
 
+function add_custom_post_types() {
+
+    register_post_type('person', array(
+        'label' => 'Person',
+        'labels' => array(
+            'name' => 'Person',
+            'singular_name' => 'Person',
+            'add_new_item' => 'Add Person',
+            'edit_item' => 'Edit Person',
+            'new_item' => 'New Person',
+            'view_item' => 'View Person',
+            'search_items' => 'Search Person'
+        ),
+        'public' => true,
+        'supports' => array('title', 'editor', 'page-attributes', 'custom-fields')
+    ));
+}
 
 function populate_flickr_taxonomy($flickr_nsid) {
 	$url = 'http://api.flickr.com/services/rest/?method=flickr.tags.getListUser&api_key='.FLICKR_API_KEY.'&user_id='.urlencode($flickr_nsid).'&format=php_serial&nojsoncallback=1';
@@ -230,7 +247,34 @@ function add_page_children($content = '') {
     return $content;
 }
 
+function create_team_member( $attributes ) {
+	$args = shortcode_atts( array(
+		'post_type' => 'person',
+		'name' => '',
+	), $attributes );
+	
+    if (!empty($attributes['name'])) {
+        $the_query = new WP_Query( $args );
+        
+		$the_query->the_post();
+		
+		$image_key_values = get_post_custom_values('picture');
+		$image_url = $image_key_values[0];
+   
+		$html = '<h4><strong>
+				<a href="'.$image_url.'">
+				<img class="alignleft size-full team_photo" src="'.$image_url.'" alt="" />
+				</a>'.get_the_title().'</strong></h4>';
+		$html .= '<p>'.get_the_content().'</p>';
+
+		wp_reset_query();
+	}
+	
+    return $html;
+}
+
 add_shortcode( 'google-calendar', 'create_calendar_iframe' );
+add_shortcode( 'team_member', 'create_team_member' );
 //add_shortcode( 'flickr-gallery', 'create_flickr_gallery' );
 add_shortcode( 'video-gallery', 'create_video_gallery' );
 add_shortcode( 'youtube-video', 'create_youtube_video' );
@@ -239,3 +283,4 @@ add_filter('excerpt_length', 'my_excerpt_length', 999);
 add_filter('body_class', 'alter_body_classes', 999);
 add_action('init', 'on_init');
 add_action('admin_init', 'on_admin_init');
+add_action('init', 'add_custom_post_types');
