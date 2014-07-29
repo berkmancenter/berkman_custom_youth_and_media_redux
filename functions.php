@@ -103,7 +103,7 @@ function add_custom_post_types() {
 }
 
 function populate_flickr_taxonomy($flickr_nsid) {
-	$url = 'http://api.flickr.com/services/rest/?method=flickr.tags.getListUser&api_key='.FLICKR_API_KEY.'&user_id='.urlencode($flickr_nsid).'&format=php_serial&nojsoncallback=1';
+	$url = 'https://api.flickr.com/services/rest/?method=flickr.tags.getListUser&api_key='.FLICKR_API_KEY.'&user_id='.urlencode($flickr_nsid).'&format=php_serial&nojsoncallback=1';
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$output = unserialize(curl_exec($ch));
