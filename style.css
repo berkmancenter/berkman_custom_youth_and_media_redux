@@ -69,9 +69,11 @@ img#logo {
 #institutions {
     position: absolute;
     right: 0;
+    top: 30px;
 }
 #institutions img {
     width: auto;
+    display: inline;
 }
 #content {
 	margin-left: 0;
