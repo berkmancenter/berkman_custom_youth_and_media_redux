@@ -182,10 +182,8 @@ function create_flickr_gallery($attributes) {
 	if (!empty($ul_class)) {
 		$ul_class = 'class="'.esc_attr($ul_class).'"';
 	}
-	wp_register_script('slideshow', get_stylesheet_directory_uri() . '/js/slideshow.js', array('jquery'));
-	wp_enqueue_script('slideshow');
 	$html = '<div '.$id.'><ul '.$ul_id.' '.$ul_class.'>';
-	$url = 'http://api.flickr.com/services/rest/?method=flickr.photos.search&per_page='.urlencode($results).'&api_key='.urlencode(FLICKR_API_KEY).'&user_id='.urlencode($flickr_nsid).'&'.$tags.'format=php_serial&nojsoncallback=1';
+	$url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&per_page='.urlencode($results).'&api_key='.urlencode(FLICKR_API_KEY).'&user_id='.urlencode($flickr_nsid).'&'.$tags.'format=php_serial&nojsoncallback=1';
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$output = unserialize(curl_exec($ch));
