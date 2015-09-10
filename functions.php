@@ -1,4 +1,4 @@
-<?php 
+<?php
 define('FLICKR_NSID', '65827107@N08');
 define('FLICKR_API_KEY', '5687af375108fc3d342075b21af266e7');
 
@@ -30,7 +30,7 @@ function on_init() {
 			'public' => true
 		)
 	);
-			
+
 	register_taxonomy(
 		'block_sizes',
 		array('post', 'page'),
@@ -110,14 +110,14 @@ function populate_flickr_taxonomy($flickr_nsid) {
 	$tags = $output['who']['tags']['tag'];
 	foreach ($tags as $tag) {
 		wp_insert_term($tag['_content'], 'flickr_tags');
-	}	
+	}
 }
 
 function populate_block_size_taxonomy() {
 	$sizes = array('Featured', 'Vertical', 'Horizontal', 'Small');
 	foreach ($sizes as $size) {
 		wp_insert_term($size, 'block_sizes');
-	}	
+	}
 }
 
 function populate_post_formats_taxonomy() {
@@ -126,7 +126,7 @@ function populate_post_formats_taxonomy() {
 		if ( ! term_exists($format, 'post_formats') ) {
 			wp_insert_term($format, 'post_formats');
 		}
-	}	
+	}
 }
 
 function populate_post_contains_taxonomy() {
@@ -135,7 +135,7 @@ function populate_post_contains_taxonomy() {
 		if ( ! term_exists( $type, 'post_contains' ) ) {
 			wp_insert_term($type, 'post_contains');
 		}
-	}	
+	}
 }
 
 function create_calendar_iframe($attributes) {
@@ -250,15 +250,15 @@ function create_team_member( $attributes ) {
 		'post_type' => 'person',
 		'name' => '',
 	), $attributes );
-	
+
     if (!empty($attributes['name'])) {
         $the_query = new WP_Query( $args );
-        
+
 		$the_query->the_post();
-		
+
 		$image_key_values = get_post_custom_values('picture');
 		$image_url = $image_key_values[0];
-   
+
 		$html = '<h4><strong>
 				<a href="'.$image_url.'">
 				<img class="alignleft size-full team_photo" src="'.$image_url.'" alt="" />
@@ -267,9 +267,11 @@ function create_team_member( $attributes ) {
 
 		wp_reset_query();
 	}
-	
+
     return $html;
 }
+
+function get_term_name($term) { return preg_replace('/[^_a-zA-Z0-9-]/', '', $term->name); }
 
 add_shortcode( 'google-calendar', 'create_calendar_iframe' );
 add_shortcode( 'team_member', 'create_team_member' );

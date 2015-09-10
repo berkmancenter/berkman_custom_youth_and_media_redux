@@ -3,7 +3,6 @@ $block_sizes = get_the_terms($post->ID, 'block_sizes');
 $post_formats = get_the_terms( $post->ID, 'post_formats' );
 $post_contains = get_the_terms( $post->ID, 'post_contains' );
 $post_order = intval(get_post_meta( $post->ID, 'front_page_order', true ));
-function get_term_name($term) { return preg_replace('/[^_a-zA-Z0-9-]/', '', $term->name); }
 if (!empty($post_formats)) {
 	$post_formats = array_map('get_term_name', $post_formats );
 }
